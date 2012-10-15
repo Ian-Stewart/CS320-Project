@@ -1,0 +1,75 @@
+@gray: #454545;
+@lightGray: @gray + @gray;
+@shadow: @gray - #111;
+@white: #f0f0f0;
+@headerColor: #aaa;
+
+@headerHeight: 50px;
+@borderRadius: 5px;
+@textPadding: 5px;
+
+header{
+    width:100%;
+    height:@headerHeight;
+    background-color: @headerColor;
+    box-shadow:0px 5px 10px @shadow;
+    color:@gray;
+    text-shadow: 0px 1px 1px @white;
+}
+
+footer {
+    width:100%;
+    height:100px;
+    background-color: @headerColor;
+    border-top: 2px solid @lightGray;
+}
+
+h1.nopadding{
+    padding:0;
+}
+
+.DEBUG{
+    border:1px solid red;
+}
+
+.fr{
+    float:right; 
+}
+
+.fl{
+    float:left;
+}
+
+.center{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+div.topBar{
+
+    position:relative;
+
+    div{
+        margin-top: @headerHeight / 2;
+    }
+}
+
+.hspacing{
+    padding:0 1em;
+}
+
+#textyInput{
+    border-radius:@borderRadius;
+    padding:@textPadding;
+    box-shadow:inset 0px 0px 3px @lightGray;
+    border:0px;
+}
+
+input{
+    #textyInput
+}
+
+textarea{
+#textyInput
+}
+

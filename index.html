@@ -15,16 +15,23 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/960.css">
-        <script src="js/vendor/modernizr-2.6.1.min.js"></script>
+        <link rel="stylesheet/less" href="css/template.less">
+        <script src="js/less.js" type="text/javascript"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
         <header>
-            <div class="innerStyling">
-                <h1> Clinical Trials </h1>
-                <div class="fr" id="username"> USERNAME </div>
+            <div class="container_12"> 
+                <div class="grid_3">
+                    <h1 class="nopadding"> Clinical Trials </h1>
+                </div>
+                <div class="grid_4_omega topBar">
+                    <div class="fr hspacing" id="username"> USERNAME </div>
+                    <div class="fr hspacing" id="logout" >Logout </div>
+                    <div class="fr hspacing hidden" id="login" >Login </div>
+                </div>
             </div>
         </header>
         <div class="container_12 DEBUG">
@@ -32,7 +39,7 @@
             <h2> H2</h2>
             <h3> H3</h3>
             <p> Lorem Ipsum blah blah blah </p>
-            <input type=text value="Text box"> </input>
+            <input id=textyInput type=text value="Text box"> </input>
             <br>
             <textarea value="text Area" > </textarea>
             <br>
@@ -40,7 +47,7 @@
             <br>
 
             <p> Application page -Nick, form viewing page - Nick, Login page - Nick, 4 dashboards -Warrent . </p>
-        </div>
+            </div>
         <footer>
         </footer>
 
