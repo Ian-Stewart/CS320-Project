@@ -125,6 +125,17 @@ footer {
     border:1px solid red;
 }
 
+.fr{
+    float:right; 
+}
+
+.fl{
+    float:left;
+}
+.center{
+    margin-left:auto;
+    margin-right:auto;
+}
 
 
 
