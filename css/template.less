@@ -1,5 +1,6 @@
 @gray: #454545;
 @lightGray: @gray + @gray;
+@darkGray: @gray - #222;
 @shadow: @gray - #111;
 @white: #f0f0f0;
 @headerColor: #aaa;
@@ -50,6 +51,26 @@ h1.nopadding{
     margin-right:auto;
 }
 
+.hspacing{
+    padding:0 1em;
+}
+
+.vspacing{
+    padding:1em 0em 1em 0em;
+}
+
+.border{
+    border:1px solid @lightGray;
+}
+
+.rounded{
+    border-radius:@borderRadius;
+}
+
+.bggray{
+    background-color:@gray;
+}
+
 div.topBar{
 
     position:relative;
@@ -59,13 +80,6 @@ div.topBar{
     }
 }
 
-.hspacing{
-    padding:0 1em;
-}
-
-.vspacing{
-    padding:1em 0em 1em 0em;
-}
 
 #textyInput{
     border-radius:@borderRadius;
