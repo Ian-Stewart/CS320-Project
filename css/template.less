@@ -32,13 +32,18 @@ h1.nopadding{
     border:1px solid red;
 }
 
-.fr{
+.fr{ /* float right */
     float:right; 
 }
 
-.fl{
+.fl{ /* float left */
     float:left;
 }
+
+.fw{ /* full width */
+    width:100%;
+}
+
 
 .center{
     margin-left:auto;
@@ -58,6 +63,10 @@ div.topBar{
     padding:0 1em;
 }
 
+.vspacing{
+    padding:1em 0em 1em 0em;
+}
+
 #textyInput{
     border-radius:@borderRadius;
     padding:@textPadding;
@@ -70,6 +79,13 @@ input{
 }
 
 textarea{
-#textyInput
+    #textyInput
 }
 
+button{
+    #textyInput
+}
+
+button:active{
+        box-shadow:inset -3px 3px 10px @gray;
+}
