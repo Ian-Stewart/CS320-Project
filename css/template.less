@@ -1,10 +1,13 @@
 @gray: #454545;
 @lightGray: @gray + @gray;
+@llGray: @gray + @gray + @gray;
 @darkGray: @gray - #222;
 @shadow: @gray - #111;
 @white: #f0f0f0;
 @headerColor: #aaa;
 @green: #693;
+@red: #F66;
+@orange: #F83;
 
 @headerHeight: 50px;
 @borderRadius: 5px;
@@ -26,12 +29,18 @@ footer {
     border-top: 2px solid @lightGray;
 }
 
-h1.nopadding{
+.nopadding{
     padding:0;
 }
 
 .DEBUG{
     border:1px solid red;
+}
+
+.DEBUG_COLOR{
+    width:100px;
+    height:100px;
+    display:inline-block;
 }
 
 .fr{ /* float right */
@@ -44,6 +53,10 @@ h1.nopadding{
 
 .fw{ /* full width */
     width:100%;
+}
+
+.hw{ /* half width */
+    width:50%;
 }
 
 .fh{ /*full heigh */
@@ -89,8 +102,32 @@ h1.nopadding{
     background-color:@lightGray;
 }
 
+.bgllGray{
+    background-color:@llGray;
+}
+
 .bggreen{
     background-color:@green;
+}
+
+.bgred{
+    background-color:@red;
+}
+
+.bgorange{
+    background-color:@orange;
+}
+
+.green{
+    color:@green;
+}
+
+.orange{
+    color:@orange;
+}
+
+.red{
+    color:@red;
 }
 
 div.topBar{
