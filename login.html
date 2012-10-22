@@ -57,16 +57,17 @@
             </div>
             
             <div class="grid_2 prefix_1 suffix_2 vspacing">
-                <button class="fw" name="login"> Login </button">
+                <button class="fw" name="login" id="loginButton"> Login </button">
             </div>
 
             <div class="grid_2"> 
                  Debug role: 
-                <select name="role">
-                    <option name="doctor">Investigator</option>
-                    <option name="admin">Department Coordinator </option>
-                    <option name="reviewer">CCIM</option>
-                    <option name="irb">IRB</option>
+                <select id="roleselect" name="role">
+                    <option name="dash_investigator">Investigator</option>
+                    <option name="dash_department">Department Coordinator </option>
+                    <option name="dash_cci">CCI</option>
+                    <option name="dash_irb">IRB</option>
+                    <option name="dash_chair">Chair</option>
                 </select>
             </div>
 
@@ -78,13 +79,14 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/javascript"> 
+            $("#loginButton").click(function (){
+                var type = $("#roleselect").find(":selected").attr("name");
+                console.log(type);
+                window.location=type+".html";
+            });
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+        </script> 
+
     </body>
 </html>
