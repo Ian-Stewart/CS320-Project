@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.8.8/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'node-mysql' ]
+2 info using npm@1.1.59
+3 info using node@v0.8.8
+4 verbose read json /Users/Nick/workspace/web_design/cs320/package.json
+5 verbose read json /Users/Nick/workspace/web_design/cs320/package.json
+6 verbose cache add [ 'node-mysql', null ]
+7 silly cache add name=undefined spec="node-mysql" args=["node-mysql",null]
+8 verbose parsed url { pathname: 'node-mysql',
+8 verbose parsed url   path: 'node-mysql',
+8 verbose parsed url   href: 'node-mysql' }
+9 silly lockFile 4522d1f6-node-mysql node-mysql
+10 verbose lock node-mysql /Users/Nick/.npm/4522d1f6-node-mysql.lock
+11 silly lockFile 4522d1f6-node-mysql node-mysql
+12 verbose addNamed [ 'node-mysql', '' ]
+13 verbose addNamed [ null, '' ]
+14 silly lockFile 4ca5d929-node-mysql node-mysql@
+15 verbose lock node-mysql@ /Users/Nick/.npm/4ca5d929-node-mysql.lock
+16 silly addNameRange { name: 'node-mysql', range: '', hasData: false }
+17 verbose url raw node-mysql
+18 verbose url resolving [ 'https://registry.npmjs.org/', './node-mysql' ]
+19 verbose url resolved https://registry.npmjs.org/node-mysql
+20 info retry registry request attempt 1 at 13:10:27
+21 http GET https://registry.npmjs.org/node-mysql
+22 http 404 https://registry.npmjs.org/node-mysql
+23 silly registry.get cb [ 404,
+23 silly registry.get   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+23 silly registry.get     date: 'Wed, 28 Nov 2012 18:09:51 GMT',
+23 silly registry.get     'content-type': 'application/json',
+23 silly registry.get     'content-length': '52',
+23 silly registry.get     'cache-control': 'must-revalidate' } ]
+24 silly lockFile 4ca5d929-node-mysql node-mysql@
+25 error 404 'node-mysql' is not in the npm registry.
+25 error 404 You should bug the author to publish it
+25 error 404
+25 error 404 Maybe try 'npm search mysql'
+25 error 404
+25 error 404 Note that you can also install from a
+25 error 404 tarball, folder, or http url, or git url.
+26 error System Darwin 12.2.1
+27 error command "/usr/local/Cellar/node/0.8.8/bin/node" "/usr/local/bin/npm" "install" "node-mysql"
+28 error cwd /Users/Nick/workspace/web_design/cs320
+29 error node -v v0.8.8
+30 error npm -v 1.1.59
+31 error code E404
+32 verbose exit [ 1, true ]
