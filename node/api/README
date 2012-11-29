@@ -1,0 +1,3 @@
+This is the folder for all publically available functions for the server. Anything that the front end is going to call should be made available here. 
+
+tl;dr, Adapter folder.
