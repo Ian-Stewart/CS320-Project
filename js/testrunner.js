@@ -1,13 +1,31 @@
-(function(){
+(function( adapter ){
 
     var testCases = {
         
-        alwaysFalse: function(){
+        alwaysFails: function(){
             return false;
         },
-        alwaysTrue: function(){
+        alwaysPasses: function(){
             return true;
         },
+        expectAdapterError: function(){
+            var error = adapter.throwAdapterError();
+            if(error.code == 500 && error.result=="error"){
+                return true;
+            } else {
+                console.log("throwAdapterError failed. msg: " + error.msg);
+                return false;
+            }
+        },
+        getAdapterSuccess: function(){
+            var success = adapter.getSuccess();
+            if(success.code == 200 && success.result=="success"){
+                return true;
+            } else {
+                console.log("getAdapterSuccess failed. Msg: " + success.msg);
+                return false;
+            }
+        }
 
         /* Add test cases here. Should be in the format of
 
@@ -39,4 +57,4 @@
     for(var test in testCases){
         testRunner(test);
     }
-})();
+})( mockAdapter );
