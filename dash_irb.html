@@ -28,8 +28,15 @@
                     <h1 class="nopadding"> Clinical Trials </h1>
                 </div>
                 <div class="grid_4_omega topBar">
-                    <div class="fr hspacing" id="username"> USERNAME </div>
-                    <div class="fr hspacing" id="logout" >Logout </div>
+                    <div class="fr hspacing" id="username"> IRB </div>
+<div class="fr hspacing" id="logout"><a href="#" onclick="btnLogout();">Logout </a></div>
+<script>
+function btnLogout()
+		{
+			//var btnLogout = document.getElementById("logout");
+			window.location="login.html";
+		}
+</script>
                     <div class="fr hspacing hidden" id="login" >Login </div>
                 </div>
             </div>

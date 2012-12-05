@@ -28,8 +28,15 @@
                     <h1 class="nopadding"> Clinical Trials </h1>
                 </div>
                 <div class="grid_4_omega topBar">
-                    <div class="fr hspacing" id="username"> USERNAME </div>
-                    <div class="fr hspacing" id="logout" >Logout </div>
+                    <div class="fr hspacing" id="username"> Principal_Investigator </div>
+                    <div class="fr hspacing" id="logout"><a href="#" onclick="btnLogout();">Logout </a></div>
+<script>
+function btnLogout()
+		{
+			//var btnLogout = document.getElementById("logout");
+			window.location="login.html";
+		}
+</script>
                     <div class="fr hspacing hidden" id="login" >Login </div>
                 </div>
             </div>
@@ -76,7 +83,13 @@
                 </div>
 
                 <div class="grid_3 border rounded bglightGray">
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> 
+                    <h4 class="textCenter fw pxShadow"><a href="#" onclick="btnDelete();">View / Edit </a></h4> 
+<script>
+function btnDelete()
+		{
+			alert("This Application is locked. You are not allowed to Edit it");
+		}
+</script>
                 </div>
             </div>
             <div class="grid_12 vspacing">
