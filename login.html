@@ -67,40 +67,53 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script type="text/javascript"> 
-            $("#loginButton").click(function (){
-                var type = $("#roleselect").find(":selected").attr("name");
-                console.log(type);
-                window.location=type+".html";
-            });
 
-            function userVerify()
+        <script type="text/javascript">
+    $("#loginButton").click(function (){
+        var type = $("#roleselect").find(":selected").attr("name");
+        console.log(type);
+        window.location=type+".html";
+    });
+
+    function userVerify()
+    {
+        var txtUsername = document.getElementById("myUsername").value;
+        var allowedUsers = new Array("pi@beth.org", "irb@beth.org");
+
+        // If username is in the array
+        if ($.inArray(txtUsername ,allowedUsers) >= 0)
+        {
+            if (txtUsername == "pi@beth.org")
             {
-                var txtUsername = document.getElementById("myUsername");
-                if (txtUsername.value == "pi@beth.org")
-                    {
-                        window.location="dash_investigator.html";
-                        localStorage.roles="pi";
-                    }
-                else if (txtUsername.value == "irb@beth.org")
-                    {
-                        window.location="dash_irb.html";					
-                    }
-                else if(!validateEmail(txtUsername.value)){
-                    alert("Please enter a valid username");
-                }
-                else if(txtUsername.value == "")
-                    {
-                        alert("Please enter a username");
-                    }
+                localStorage.roles = "pi";
             }
+            else if (txtUsername == "irb@beth.org")
+            {
+                localStorage.roles = "irb";
+            }
+            else if (txtUsername == "multiple@beth.org")
+            {
+                localStorage.roles = "pi,irb"
+            }
+            localStorage.username = txtUsername;
+            window.location = "dashboard.html";
+        }
+        else if(!validateEmail(txtUsername)){
+            alert("Please enter a valid username");
+        }
+        else if(txtUsername == "") {
+            alert("Please enter a username");
+        }
+        else {
+            alert("Please enter a valid username");
+        }
+    }
 
-                function validateEmail(email) { 
-                        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                            return re.test(email);
-                } 
-
-        </script> 
+    function validateEmail(email) { 
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+</script> 
 
     </body>
 </html>
