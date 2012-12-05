@@ -237,13 +237,18 @@ function testGetFormA(){
 //Code to call tests
 DAL.connectToDatabase(); //connect to the database
 
+DAL.testa(123451);
+
 testIsUserValid();
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
 //console.log("Done with all tests!");.
 
-//var printIt = function (obj) { console.log(obj); };
-//DAL.isUserValid(vuser, vpass, printIt);
-//DAL.isUserValid(vuser, ivpass, printIt);
+var printIt = function (obj) { console.log(obj); };
+
+var usersEntry = { uid: 123999, first_name: 'test2', last_name: 'user', email: "123@abc.net", telephone: "11231231234", pager_number: "1231231234", fax: "11231231234" };
+
+
+
 
 
