@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -28,16 +29,15 @@
                     <h1 class="nopadding"> Clinical Trials </h1>
                 </div>
                 <div class="grid_4_omega topBar">
-                    <div class="fr hspacing" id="username"> Principal_Investigator </div>
-                    <div class="fr hspacing" id="logout"><a href="#" onclick="btnLogout();">Logout </a></div>
+                    <div class="fr hspacing" id="username"> USERNAME </div>
+                    <div class="fr hspacing" id="logout" >Logout </div>
                     <div class="fr hspacing hidden" id="login" >Login </div>
                 </div>
             </div>
         </header>
-        <div class="container_12 DEBUG">
-
+        <div class="container_12 hidden" id="dashBoard">
             <div class="grid_12 vspacing">
-                <h2>Pending Applications</h2>
+                <h2>Applications Requiring Review</h2>
             </div>
             <div class="grid_12 vspacing">
                 <div class="grid_4 border rounded"> 
@@ -55,7 +55,21 @@
                 <div class="grid_4 border rounded"> 
                     <h3>Some Different Sample Application</h3> 
                 </div>
-                
+                <div class="grid_2 border rounded bggreen">
+                    <h4 class="textCenter fw pxshadow"> Complete </h4> 
+                </div>
+
+                <div class="grid_3 border rounded bglightGray">
+                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> 
+                </div>
+            </div>
+            <div class="grid_12 vspacing">
+                <h2>Deferred Applications</h2>
+            </div>
+            <div class="grid_12 vspacing">
+                <div class="grid_4 border rounded"> 
+                    <h3>Another Sample Application</h3> 
+                </div>
                 <div class="grid_2 border rounded bggray">
                     <h4 class="textCenter fw pxshadow lightText"> Pending </h4> 
                 </div>
@@ -65,28 +79,7 @@
                 </div>
             </div>
             <div class="grid_12 vspacing">
-                <h2>Completed Applications</h2>
-            </div>
-            <div class="grid_12 vspacing">
-                <div class="grid_4 border rounded"> 
-                    <h3>Another Sample Application</h3> 
-                </div>
-                <div class="grid_2 border rounded bggreen">
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> 
-                </div>
-
-                <div class="grid_3 border rounded bglightGray">
-                    <h4 class="textCenter fw pxShadow"><a href="#" onclick="btnDelete();">View / Edit </a></h4> 
-<script>
-function btnDelete()
-		{
-			alert("This Application is locked. You are not allowed to Edit it");
-		}
-</script>
-                </div>
-            </div>
-            <div class="grid_12 vspacing">
-                <h2>Applications Under Review</h2>
+                <h2>Applications Under IRB Review</h2>
             </div>
             <div class="grid_12 vspacing">
                 <div class="grid_4 border rounded"> 
@@ -118,8 +111,6 @@ function btnDelete()
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
-
-            console.log(localStorage.roles);
         </script>
     </body>
 </html>
