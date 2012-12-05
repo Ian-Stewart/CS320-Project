@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
+<!--Nico MOD -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -28,8 +29,6 @@
                     <h1 class="nopadding"> Clinical Trials </h1>
                 </div>
                 <div class="grid_4_omega topBar">
-                    <div class="fr hspacing" id="username"> USERNAME </div>
-                    <div class="fr hspacing" id="logout" >Logout </div>
                     <div class="fr hspacing hidden" id="login" >Login </div>
                 </div>
             </div>
@@ -42,7 +41,7 @@
 
             <div class="grid_6 prefix_3 suffix_3 vspacing">
                 <h3> Username: </h3>
-                <input class="fw" type="text" name="username">
+                <input class="fw" type="text" name="username" id="myUsername">
                 </input>
             </div>
 
@@ -57,18 +56,7 @@
             </div>
             
             <div class="grid_2 prefix_1 suffix_2 vspacing">
-                <button class="fw" name="login" id="loginButton"> Login </button">
-            </div>
-
-            <div class="grid_2"> 
-                 Debug role: 
-                <select id="roleselect" name="role">
-                    <option name="dash_investigator">Investigator</option>
-                    <option name="dash_department">Department Coordinator </option>
-                    <option name="dash_cci">CCI</option>
-                    <option name="dash_irb">IRB</option>
-                    <option name="dash_chair">Chair</option>
-                </select>
+                <button class="fw" name="login" id="btnLogin" onclick="userVerify();"> Login </button">
             </div>
 
         </div>
@@ -85,6 +73,32 @@
                 console.log(type);
                 window.location=type+".html";
             });
+
+            function userVerify()
+            {
+                var txtUsername = document.getElementById("myUsername");
+                if (txtUsername.value == "pi@beth.org")
+                    {
+                        window.location="dash_investigator.html";
+                        localStorage.roles="pi";
+                    }
+                else if (txtUsername.value == "irb@beth.org")
+                    {
+                        window.location="dash_irb.html";					
+                    }
+                else if(!validateEmail(txtUsername.value)){
+                    alert("Please enter a valid username");
+                }
+                else if(txtUsername.value == "")
+                    {
+                        alert("Please enter a username");
+                    }
+            }
+
+                function validateEmail(email) { 
+                        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            return re.test(email);
+                } 
 
         </script> 
 
