@@ -77,23 +77,27 @@
             function userVerify()
             {
                 var txtUsername = document.getElementById("myUsername");
-                if (txtUsername.value == "Principal_Investigator")
+                if (txtUsername.value == "pi@beth.org")
                     {
                         window.location="dash_investigator.html";
                     }
-                else if (txtUsername.value == "IRB")
+                else if (txtUsername.value == "irb@beth.org")
                     {
                         window.location="dash_irb.html";					
                     }
+                else if(!validateEmail(txtUsername.value)){
+                    alert("Please enter a valid username");
+                }
                 else if(txtUsername.value == "")
                     {
                         alert("Please enter a username");
                     }
-                else
-                    {
-                        alert(txtUsername.value + " is not a valid username");
-                    }
             }
+
+                function validateEmail(email) { 
+                        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\ ".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            return re.test(email);
+                } 
 
         </script> 
 
