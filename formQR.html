@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/960.css">
+        <link rel="stylesheet/less" href="css/template.less">
+        <script src="js/less.js" type="text/javascript"></script>
+
+        <style media="screen" type="text/css">
+            #article
+            {
+               outline:#646060 solid 1px
+            }
+            
+            
+           p { padding-left: 3px;}
+
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        <header>
+            <div class="container_12"> 
+                <div class="grid_3">
+                    <h1 class="nopadding"> Clinical Trials </h1>
+                </div>
+                <div class="grid_4_omega topBar">
+                    <div class="fr hspacing" id="username"> USERNAME </div>
+                    <div class="fr hspacing" id="logout" >Logout </div>
+                    <div class="fr hspacing hidden" id="login" >Login </div>
+                </div>
+            </div>
+        </header>
+        <div class="container_12 DEBUG">
+            <div class="grid_9">
+                
+                <div class="grid_3 ">
+                    <h3> Application: $APPNAME, <br>  Part $PARTNAME </h3>
+                </div>
+                <div class="grid_9">This form must be completed <strong>by all key personnel</strong> on the research study. Information provided will
+                 be shared only with those who have a need to know for conflicts management purposes.
+                 <input class="clear" />
+                </div>
+                <div id="article" class="grid_9">
+                    <input class="fw" type="text" value="TITLE OF PROTOCOL:"/>
+                    <input class="fw" type="text" value="Principal Investigator:"/>
+                    <input class="fw" type="text" value="Co Investigators:"/>
+                    <input class="fw" type="text" value="Mailing Address:"/>
+                    <input class="fw" type="text" value="E-Mail Address:"/>
+                    <input class="grid_3 alpha" type="text" value="P.I.’s Telephone"/>
+                    <input class="grid_3" type="text" value="E-Mail Address:"/>
+                    <input class="grid_3 omega" type="text" value="Fax:"/>
+                   <!-- Can space the above statement out better in QR and form A...do that later-->
+                </div>
+                <!-- Information table -->
+                <input class="clear" />
+                <div class="grid_9"> 
+                <h3 class="fw bgllGray"<strong>INFORMATION</strong> </h3>
+                </div>
+                <div id=article class="grid_9"> 
+   
+                    <input class="fw" type="text" value="Name (if applicable):"/>
+                    <input class="fw" type="text" value="Principal Investigator:"/>
+                    <input class="fw" type="text" value="Co Investigators:"/>
+                    <input class="hw fl" type="text" value="Dept/Service:"/>
+                    <input class="hw fl" type="text" value="Division/Unit"/>
+
+                    <br /> 
+                    
+                 
+                <div id="article" class="grid_9 alpha">
+                <p>Indicate role in study:</p>
+               
+                <input class="clear" />
+                    <div class="grid_4">
+                        <input type="checkbox" value="Responsible Treating Physician (if different from PI)"/>Responsible Treating Physician (if different from PI)<br />   
+                        <input type="checkbox" value="Co-Investigator"/>"Co-Investigator"<br /> 
+                        <input type="checkbox" value="Research Coordinator"/>Research Coordinator<br /> 
+                        <input type="checkbox" value="Non-study Staff"/>Non-study Staff<br /> 
+                    </div>
+
+
+                    <div class="grid_2"> 
+                        <input type="checkbox" value="Data Coordinator/Manager"/> Data Coordinator/Manager<br />
+                        <input type="checkbox" value="Research Nurse"/> Research Nurse<br /> 
+                        <input class="qw" type="text" value="Other, specify:" sp<br />
+                    </div>
+
+                    <input class="clear" />
+
+                <p><strong>If study staff is not employed by BIDMC or is not on the staff at BIDMC, he/she will need an
+appointment to BIDMC if they will be working with subjects at BIDMC or doing study related
+activity on site.</strong> (Please work with your department administrator to facilitate this. If the individual holds
+a license to practice (such as nursing, medicine, acupuncture, etc., please work with the department that
+credentials similar individuals.)
+</p>
+<input class="clear" />
+               </div>           
+                       <input class="fw" type="text" value="Mailing Address"/>
+                    <input class="fw" type="text" value="E-mail Address"/>
+                    <input class="grid_3 alpha" type="text" value="Telephone"/>
+                    <input class="grid_3" type="text" value="Pager:"/>
+                    <input class="grid_3 omega" type="text" value="Fax:"/>
+               </div> 
+                <input class="clear" />
+                    <div class="grid_9"> 
+                <h3 class="fw bgllGray"> CONFIRMATION </h3>
+                </div>
+                     <div id="article" class="grid_9">
+                     <p>As a member of the study staff on this protocol, I certify the following:</p>
+                     <input class="clear" />
+           <input type="checkbox" id="chk1" /> <label for="chk1">I have reviewed this protocol and acknowledge my participation;</label>
+            <input class="clear" />
+           <input type="checkbox" id="Checkbox1" /> <label for="chk1"> I have completed the online CITI exam </label>
+            <input class="clear" />
+           <input type="checkbox" id="Checkbox2" /> <label for="chk1">I have included written documentation that I have completed Human Subjects Research training and
+HIPAA training at another institution (for non-BIDMC study personnel);</label>
+ <input class="clear" />
+           <input type="checkbox" id="Checkbox3" /> <label for="chk1">For research activities involving access to and use of medical record information, all medical data
+relating to, and identifying an individual patient will be kept confidential and will not be disclosed to any other person or organization without prior written consent of the CCI, including reports or
+publications about the research study.Furthermore, neither subjects nor their families will be
+contacted without first obtaining approval from the CCI unless the PI is also the attending physician
+for the subject;</label>
+
+ <input type="checkbox" id="Checkbox4" /> <label for="chk1">I accept responsibility for assuring adherence to applicable federal and state research regulations,
+BIDMC policies, and CCI policies relative to the protection of the right and welfare of subjects
+enrolled this study.</label>
+                    </div>  
+                      
+                           <input class="clear" />    
+                                <div class="grid_9"> 
+                <h3> <strong>CONFLICT OF INTEREST</strong> </h3>
+                </div>
+                                
+                                <div id="article" class="grid_9">
+                                  <input class="clear" />  
+                                <p><strong>A.     </strong>   Do you or any member of your immediate family (parent, spouse, sibling, child or anyone else
+who shares your household) have any interest or relationship, <strong>paid or unpaid</strong>, in the sponsor or any
+other entity related to this study (e.g., contract research organization, peer review entity, laboratory to
+which research specimens are being referred)?</p>
+<input class="clear" />   
+<div class="grid_1">
+  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  </div>
+<div class="grid_2">
+<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+  </div>
+  <input class="clear" />   
+  <div class="grid_9">
+  <p>If YES, please check all of the following that apply:</p>
+  </div>
+  
+  <div class="grid_1">
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+  <input class="clear" /> 
+
+  </div>
+ 
+ 
+   <input type="checkbox" value="Consulting (paid or unpaid)"/>Consulting (paid or unpaid)<br /> 
+                        <input type="checkbox" value="Executive or other management position"/>Executive or other management position<br /> 
+                        <input type="checkbox" value="Other employment position"/>Other employment position<br /> 
+                        <input type="checkbox" value="Member of board of Directors (voting or nonvoting)"/>Member of board of Directors (voting or nonvoting)<br />   
+                        <input type="checkbox" value="Member of Scientific Advisory Board or other board(paid or unpaid)"/>Member of Scientific Advisory Board or other board(paid or unpaid)<br /> 
+                        <input type="checkbox" value="Stock, stock option, partnership share, other ownership interest"/>Stock, stock option, partnership share, other ownership interest<br /> 
+                        <input type="checkbox" value="Royalties or license fees"/>Royalties or license fees<br /> 
+                        <input type="checkbox" value="Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value"/>Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value<br />   
+                        <input type="checkbox" value="Author of papers, conducted lectures or teaching engagements (paid or unpaid)"/>Author of papers, conducted lectures or teaching engagements (paid or unpaid)<br /> 
+                        <input type="checkbox" value="Gifts or gratuities"/>Gifts or gratuities<br /> 
+                        <input type="checkbox" value="Loans or lease relationships (e.g., space, equipment, or personnel)"/>Loans or lease relationships (e.g., space, equipment, or personnel)<br /> 
+                        <input class="qw invisible" type="text" value="Name (if applicable):"/>
+                        <input class="hw" type="text" value="Other:"/>
+  <input class="clear" /> 
+
+<p><strong>B.     </strong>   Do you or any member of your immediate family (parent, spouse, sibling, child or anyone else
+who shares your household) have any interest or relationship,<strong> paid or unpaid, in a competitor </strong> to the
+sponsor or any other entity related to this study (e.g., contract research organization, peer review entity,
+laboratory to which specimens are being referred)?</p>
+<input class="clear" />   
+<div class="grid_1">
+  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  </div>
+<div class="grid_2">
+<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+</div>
+<input class="clear" />   
+<p><strong>C.     </strong>   
+To the best of your knowledge, does BIDMC have a financial interest in the outcome of this
+research?</p>
+<input class="clear" />  
+<div class="grid_1">
+  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  </div>
+<div class="grid_2">
+<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+</div>
+ <input class="fw" type="text" value="If yes, please describe:" />
+  </div>
+   <input class="clear" /> 
+  <div class="grid_9">
+  <p>By my signature below, I certify that I have completed this form truthfully and to the best of my knowledge.
+Further, I understand that it is my obligation to update this form promptly if there is any change.</p>
+  </div>
+  <div class="grid_6">
+   <input class="fw" type="text" value="Signature:" />
+  </div>
+  <div class="grid_3">
+  <input class="fw" type="text" value="Date:" />
+  </div>
+  <div class="grid_6">
+  <input class="fw" type="text" value="Print Name:" />
+  </div>
+ 
+  
+
+            </div>
+            </div>
+               
+              
+                
+                
+                
+
+        
+        <footer>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script>            window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+            (function (d, t) {
+                var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g, s)
+            } (document, 'script'));
+        </script>
+    </body>
+</html>
