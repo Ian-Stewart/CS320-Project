@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/960.css">
+        <link rel="stylesheet/less" href="css/template.less">
+        <script src="js/less.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        <header>
+            <div class="container_12"> 
+                <div class="grid_3">
+                    <h1 class="nopadding"> Clinical Trials </h1>
+                </div>
+                <div class="grid_4_omega topBar">
+                    <div class="fr hspacing" id="username"> USERNAME </div>
+                    <div class="fr hspacing" id="logout" >Logout </div>
+                    <div class="fr hspacing hidden" id="login" >Login </div>
+                </div>
+            </div>
+        </header>
+        <div class="container_12 DEBUG">
+            <div class="grid_9">
+                <div class="grid_3 ">
+                    <h3> Application: $APPNAME, <br>  Part $PARTNAME </h3>
+                </div>
+                <!-- A1. Title of Proposal -->
+                <div class="grid_9"> 
+                    <h3 class="fw bgllGray"> A1. Title of Proposal </h3>
+                    <input class="fw" type="text"/> 
+                </div>
+
+                <div class="grid_9">
+                    <h3 class="fw" > Short Title: </h3><h5><em>(50 characters – must contain 
+                        keywords for identifying protocol)</em></h5>
+                    <input class="fw" type="text"/>
+                </div> 
+                <!-- A2. Research Staff Information -->
+                <div class="grid_9 vspacing">
+                    <h3 class="fw bgllGray"> A2. Research Staff Information </h3> 
+                    <h4> Principal Investigator (PI) </h4> 
+                    <input class="fw" type="text" value="Principal Investigator"/>
+                    <input class="hw fl" type="text" value="Department"/>
+                    <input class="hw fl" type="text" value="Division"/>
+                    <input class="fw" type="text" value="P.I.'s Chief of Department or Division (if applicable):"/>
+                    <input class="fw" type="text" value="P.I. Internal BIDMC Mailing Address:"/>
+                    <input class="fw" type="text" value="P.I. E-Mail Address:"/>
+                    <input class="fw" type="text" value="P.I.’s Telephone:
+                     P.I.’s Pager:
+                      Fax:"/>
+                </div>
+                <div class="grid_9 vspacing">
+                    <h4 class="fw bgllGray"> Co-Investigator/Study Staff Information </h4> 
+                    <h6><em>List below all co-investigators and study staff participating in this study. Attach 
+                        individual co-investigator/Key study personnel information page(s) and Conflict of 
+                        Interest Disclosure Forms – Part Q and Part R.  </em></h6> 
+                    <input class="fw" type="text" value="Co-Investigators:"/>
+                    <h5 class ="fw bgllGray"><strong><em>Main Contact Information</em></strong></b></h5>
+                    <h6><em>(This is the individual that will receive CCI/ IRB correspondence in addition to 
+                        the Principal Investigator). Attach Co-Investigator/Key Study personnel information 
+                        page-Part Q for this individual.</em></h6> 
+                    <input class="fw" type="text" value="Data Coordinator/Contact person:"/>
+                    <input class="fw" type="text" value="Mailing Address:"/>
+                    <input class="fw" type="text" value="Email Address:"/>
+                    <input class="fw" type="text" value="Telephone:
+                      Pager:
+                      Fax:"/>
+                </div>
+                <!-- A3. Study Type -->
+                <div class="grid_9 vspacing">
+                    <h3 class="fw bgllGray">A3. Basic Study Type and Design Information </h3> 
+                    <h4>Study Type</h4>
+                    <h5><em>(check all that apply)</em></h5>
+                    <br /> 
+
+                    <div class="grid_2 alpha">
+                        <input type="checkbox" value="Therapeutic"/> Therapeutic<br />   
+                        <input type="checkbox" value="Pilot"/> Pilot<br /> 
+                        <input type="checkbox" value="Discarded Tissue"/> Discarded Tissue<br /> 
+                        <input type="checkbox" value="Creating a Data/Tissue Repository"/> Creating a Data/Tissue Repository<br /> 
+                    </div>
+
+
+                    <div class="grid_2">
+                        <input type="checkbox" value="Diagnostic"/> Diagnostic<br />
+                        <input type="checkbox" value="Survey"/> Survey<br /> 
+                        <input type="checkbox" value="Genetic Research"/> Genetic Research<br />
+                        <input type="checkbox" value="Program Evaluation"/> Program Evaluation<br />
+                    </div>
+
+
+                    <div class="grid_2">
+                        <input type="checkbox" value="Epidemiologic"/> Epidemiologic<br />
+                        <input type="checkbox" value="Registry"/> Registry<br />
+                        <input type="checkbox" value="Gene Transfer"/> Gene Transfer<br />
+                        <input type="checkbox" value="Focus Groups"/> Focus Groups<br />
+                    </div>
+
+                    <div class="grid_2 omega">
+                        <input type="checkbox" value="Physiologic"/> Physiologic<br />
+                        <input type="checkbox" value="Medical Record Review"/> Medical Record Review<br />
+                        <input type="checkbox" value="Educational Research"/> Educational Research<br />
+                        <input type="checkbox" value="Other"/> Other<br />
+                        <input class="fw" type="text" value="if 'other', explain:"/>
+                    </div>
+                </div>
+                <!-- Sub A3.Design -->
+                <div class="grid_9">
+                    <h4>Design</h4>
+                    <h5><em>(if applicable)</em></h5>
+                    <br />
+                    <div class="grid_2 alpha">
+                        <input type="checkbox" value="Randomized"/> Randomized<br />
+                    </div>
+                    <div class="grid_2">
+                        <input type="checkbox" value="Blind"/> Blind<br />
+                    </div>
+                    <div class="grid_2 omega">
+                        <input type="checkbox" value="Double-Blind"/> Double-Blind<br />
+                    </div> 
+                </div>
+                <!-- Sub A3. Phase -->
+                <div class="grid_9">
+                    <h4>Phase</h4>
+                    <h5><em>(if applicable)</em></h5>
+                    <br />
+                    <div class="grid_1 alpha">
+                        <input type="checkbox" value="1"/> 1<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="1/2"/> 1/2<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="2"/> 2<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="2/3"/> 2/3<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="3"/> 3<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="4"/> 4<br />
+                    </div>
+                    <div class="grid_1">
+                        <input type="checkbox" value="Other(explain)"/> Other<br />
+                    </div>
+                    <div class="grid_2 omega">
+                        <input class="fw" type="text" value="if 'other', explain:"/>
+                    </div>                                    
+                </div>
+                <!-- Sub A3. Placebo Control -->
+                <div class="grid_9">
+                    <h4>Placebo Control</h4>
+                    <h5><em>(if applicable)</em></h5>
+                    <br />
+                    <div class="grid_1 alpha">
+                        <input type="checkbox" value="Yes"/> Yes<br />
+                    </div>
+                    <div class="grid_1 omega">
+                        <input type="checkbox" value="No"/> No<br />
+                    </div>
+                </div>
+            </div>
+            <div class="grid_3">
+                <h3> Revision History </h3>
+                <div class="border insetShadow">
+                    <h4 class="fw textCenter green nopadding"> Dr. Nick </h4>
+                    <h5 class="fw textCenter nopadding" > 10/12/2012 </h5>
+                </div>
+                <div class="border insetShadow">
+                    <h4 class="fw textCenter orange nopadding"> Dr. Dre </h4>
+                    <h5 class="fw textCenter nopadding" > 10/10/2012 </h5>
+                </div>
+                <div class="border insetShadow">
+                    <h4 class="fw textCenter green nopadding"> Dr. Nick </h4>
+                    <h5 class="fw textCenter nopadding" > 10/8/2012 </h5>
+                </div>
+                <div class="border insetShadow">
+                    <h4 class="fw textCenter red nopadding"> Dr. Princess </h4>
+                    <h5 class="fw textCenter nopadding" > 10/1/2012 </h5>
+                </div>
+                
+            </div>
+                
+
+        </div>
+        <footer>
+        </footer>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
