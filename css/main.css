@@ -100,9 +100,10 @@ textarea {
       shadow:333;
    */
 
-
-
-
+.formLabel {
+    line-height:40px;
+    font-weight:bold;
+}
 
 
 
