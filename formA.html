@@ -54,66 +54,64 @@
                     <div class="grid_3 formLabel"> Department: </div><input class="grid_5" name="pIDepartment" type="text"/>
                     <div class="grid_3 formLabel"> Division: </div><input class="grid_5" name="pIDivision" type="text"/>
                     <div class="grid_3 formLabel"> Division/Department Chief: </div><input class="grid_5" name="pIChief" type="text"/>
-                    <div class="grid_3 formLabel"> PI's BIDMC Mailing Address: </div><input class="grid_5" name="pIChief" type="text"/>
-                    
-                    <input class="fw" type="text" value="P.I. E-Mail Address:"/>
-                    <input class="fw" type="text" value="P.I.’s Telephone:
-                     P.I.’s Pager:
-                      Fax:"/>
+                    <div class="grid_3 formLabel"> PI's BIDMC Mailing Address: </div><input class="grid_5" name="pIMail" type="text"/>
+                    <div class="grid_3 formLabel"> PI's Phone Number: </div><input class="grid_5" name="pIPhone" type="text"/>
+                    <div class="grid_3 formLabel"> PI's Pager Number: </div><input class="grid_5" name="pIPager" type="text"/>
+                    <div class="grid_3 formLabel"> PI's Fax Number: </div><input class="grid_5" name="pIFax" type="text"/>
                 </div>
                 <div class="grid_9 vspacing">
                     <h4 class="fw bgllGray"> Co-Investigator/Study Staff Information </h4> 
                     <h6><em>List below all co-investigators and study staff participating in this study. Attach 
                         individual co-investigator/Key study personnel information page(s) and Conflict of 
                         Interest Disclosure Forms – Part Q and Part R.  </em></h6> 
-                    <input class="fw" type="text" value="Co-Investigators:"/>
+                    <div class="grid_3 formLabel"> Co-Investigators </div><input class="grid_5" name="cINames" type="text"/>
                     <h5 class ="fw bgllGray"><strong><em>Main Contact Information</em></strong></b></h5>
                     <h6><em>(This is the individual that will receive CCI/ IRB correspondence in addition to 
                         the Principal Investigator). Attach Co-Investigator/Key Study personnel information 
                         page-Part Q for this individual.</em></h6> 
-                    <input class="fw" type="text" value="Data Coordinator/Contact person:"/>
-                    <input class="fw" type="text" value="Mailing Address:"/>
-                    <input class="fw" type="text" value="Email Address:"/>
-                    <input class="fw" type="text" value="Telephone:
-                      Pager:
-                      Fax:"/>
+                    <div class="grid_3 formLabel"> Data Coordinator/Contact </div><input class="grid_5" name="dCName" type="text"/>
+                    <div class="grid_3 formLabel"> Mailing Address </div><input class="grid_5" name="dCMail" type="text"/>
+                    <div class="grid_3 formLabel"> Email Address </div><input class="grid_5" name="dCEmail" type="text"/>
+                    <div class="grid_3 formLabel"> Telephone </div><input class="grid_5" name="dCPhone" type="text"/>
+                    <div class="grid_3 formLabel"> Pager </div><input class="grid_5" name="dCPager" type="text"/>
+                    <div class="grid_3 formLabel"> Fax </div><input class="grid_5" name="dCFax" type="text"/>
                 </div>
                 <!-- A3. Study Type -->
-                <div class="grid_9 vspacing">
+                <div id="A3" class="grid_9 vspacing">
                     <h3 class="fw bgllGray">A3. Basic Study Type and Design Information </h3> 
                     <h4>Study Type</h4>
                     <h5><em>(check all that apply)</em></h5>
                     <br /> 
 
                     <div class="grid_2 alpha">
-                        <input type="checkbox" value="Therapeutic"/> Therapeutic<br />   
-                        <input type="checkbox" value="Pilot"/> Pilot<br /> 
-                        <input type="checkbox" value="Discarded Tissue"/> Discarded Tissue<br /> 
-                        <input type="checkbox" value="Creating a Data/Tissue Repository"/> Creating a Data/Tissue Repository<br /> 
+                        <input type="checkbox" name="study1" value="Therapeutic"/> Therapeutic<br />   
+                        <input type="checkbox" name="study2" value="Pilot"/> Pilot<br /> 
+                        <input type="checkbox" name="study3" value="Discarded Tissue"/> Discarded Tissue<br /> 
+                        <input type="checkbox" name="study4" value="Creating a Data/Tissue Repository"/> Creating a Data/Tissue Repository<br /> 
                     </div>
 
 
                     <div class="grid_2">
-                        <input type="checkbox" value="Diagnostic"/> Diagnostic<br />
-                        <input type="checkbox" value="Survey"/> Survey<br /> 
-                        <input type="checkbox" value="Genetic Research"/> Genetic Research<br />
-                        <input type="checkbox" value="Program Evaluation"/> Program Evaluation<br />
+                        <input type="checkbox" name="study5" value="Diagnostic"/> Diagnostic<br />
+                        <input type="checkbox" name="study6" value="Survey"/> Survey<br /> 
+                        <input type="checkbox" name="study7" value="Genetic Research"/> Genetic Research<br />
+                        <input type="checkbox" name="study8" value="Program Evaluation"/> Program Evaluation<br />
                     </div>
 
 
                     <div class="grid_2">
-                        <input type="checkbox" value="Epidemiologic"/> Epidemiologic<br />
-                        <input type="checkbox" value="Registry"/> Registry<br />
-                        <input type="checkbox" value="Gene Transfer"/> Gene Transfer<br />
-                        <input type="checkbox" value="Focus Groups"/> Focus Groups<br />
+                        <input type="checkbox" name="study9" value="Epidemiologic"/> Epidemiologic<br />
+                        <input type="checkbox" name="study10" value="Registry"/> Registry<br />
+                        <input type="checkbox" name="study11" value="Gene Transfer"/> Gene Transfer<br />
+                        <input type="checkbox" name="study12" value="Focus Groups"/> Focus Groups<br />
                     </div>
 
                     <div class="grid_2 omega">
-                        <input type="checkbox" value="Physiologic"/> Physiologic<br />
-                        <input type="checkbox" value="Medical Record Review"/> Medical Record Review<br />
-                        <input type="checkbox" value="Educational Research"/> Educational Research<br />
-                        <input type="checkbox" value="Other"/> Other<br />
-                        <input class="fw" type="text" value="if 'other', explain:"/>
+                        <input type="checkbox" name="study13" value="Physiologic"/> Physiologic<br />
+                        <input type="checkbox" name="study14" value="Medical Record Review"/> Medical Record Review<br />
+                        <input type="checkbox" name="study15" value="Educational Research"/> Educational Research<br />
+                        <input type="checkbox" name="studyOther" value="Other"/> Other(explain)<br />
+                        <input class="fw" name="studyOtherString" type="text"/>
                     </div>
                 </div>
                 <!-- Sub A3.Design -->
@@ -122,13 +120,13 @@
                     <h5><em>(if applicable)</em></h5>
                     <br />
                     <div class="grid_2 alpha">
-                        <input type="checkbox" value="Randomized"/> Randomized<br />
+                        <input type="checkbox" name="design1" value="Randomized"/> Randomized<br />
                     </div>
                     <div class="grid_2">
-                        <input type="checkbox" value="Blind"/> Blind<br />
+                        <input type="checkbox" name="design2" value="Blind"/> Blind<br />
                     </div>
                     <div class="grid_2 omega">
-                        <input type="checkbox" value="Double-Blind"/> Double-Blind<br />
+                        <input type="checkbox" name="design3" value="Double-Blind"/> Double-Blind<br />
                     </div> 
                 </div>
                 <!-- Sub A3. Phase -->
@@ -137,28 +135,28 @@
                     <h5><em>(if applicable)</em></h5>
                     <br />
                     <div class="grid_1 alpha">
-                        <input type="checkbox" value="1"/> 1<br />
+                        <input type="checkbox" name="phase1" value="1"/> 1<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="1/2"/> 1/2<br />
+                        <input type="checkbox" name="phase1_2" value="1/2"/> 1/2<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="2"/> 2<br />
+                        <input type="checkbox" name="phase2" value="2"/> 2<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="2/3"/> 2/3<br />
+                        <input type="checkbox" name="phase2_3" value="2/3"/> 2/3<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="3"/> 3<br />
+                        <input type="checkbox" name="phase3" value="3"/> 3<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="4"/> 4<br />
+                        <input type="checkbox" name="phase4" value="4"/> 4<br />
                     </div>
                     <div class="grid_1">
-                        <input type="checkbox" value="Other(explain)"/> Other<br />
+                        <input type="checkbox" name="phaseOther" value="Other(explain)"/> Other(explain)<br />
                     </div>
                     <div class="grid_2 omega">
-                        <input class="fw" type="text" value="if 'other', explain:"/>
+                        <input class="fw" name="phaseOtherString" type="text"/>
                     </div>                                    
                 </div>
                 <!-- Sub A3. Placebo Control -->
@@ -167,10 +165,10 @@
                     <h5><em>(if applicable)</em></h5>
                     <br />
                     <div class="grid_1 alpha">
-                        <input type="checkbox" value="Yes"/> Yes<br />
+                        <input type="checkbox" name="placebo1" value="Yes"/> Yes<br />
                     </div>
                     <div class="grid_1 omega">
-                        <input type="checkbox" value="No"/> No<br />
+                        <input type="checkbox" name="placebo2" value="No"/> No<br />
                     </div>
                 </div>
             </div>
