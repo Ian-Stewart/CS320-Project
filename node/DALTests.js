@@ -237,7 +237,7 @@ function testGetFormA(){
 //Code to call tests
 DAL.connectToDatabase(); //connect to the database
 
-DAL.testa(123451);
+//DAL.testa(123451);//I don't really know what this is supposed to be...
 
 testIsUserValid();
 //console.log("Testing editFormA:" + testEditFormA());
