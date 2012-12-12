@@ -24,8 +24,12 @@
                outline:#646060 solid 1px
             }
             
-            
+          .formLabel {
+    line-height:40px;
+    font-weight:bold;
+}
            p { padding-left: 3px;}
+     
 
         </style>
     </head>
@@ -57,13 +61,13 @@
                 </div>
                 <div id="article" class="grid_9">
                     <div class="grid_2 formLabel">Title of Protocol: </div><input class="grid_6" name="protocolTitle" type="text"/>
-                    <input class="fw" type="text" value="Principal Investigator:"/>
-                    <input class="fw" type="text" value="Co Investigators:"/>
-                    <input class="fw" type="text" value="Mailing Address:"/>
-                    <input class="fw" type="text" value="E-Mail Address:"/>
-                    <input class="grid_3 alpha" type="text" value="P.I.’s Telephone"/>
-                    <input class="grid_3" type="text" value="E-Mail Address:"/>
-                    <input class="grid_3 omega" type="text" value="Fax:"/>
+                    <div class="grid_2 formLabel">Co Investigators:</div><input class="grid_6" name="CoInvestigators" type="text"/>
+                    <div class="grid_2 formLabel">Mailing Address: </div><input class="grid_6" name="MailingAddress" type="text"/>
+                    <div class="grid_2 formLabel">E-Mail Address:</div><input class="grid_6" name="E-MailAddress" type="text"/>
+                    <div class="grid_2 formLabel">P.I.’s Telephone</div><input class="grid_6" name="PITelephone" type="text"/>
+                    <div class="grid_2 formLabel">P.I.'s Pager</div><input class="grid_6" name="PIPager" type="text"/>
+                    <div class="grid_2 formLabel">Fax:</div><input class="grid_6" name="Fax:" type="text"/>
+                    <div class="grid_3 formLabel">Sponsor/Funding Source:</div><input class="grid_5" name="SponsorFundingSource" type="text"/>
                    <!-- Can space the above statement out better in QR and form A...do that later-->
                 </div>
                 <!-- Information table -->
@@ -73,12 +77,16 @@
                 </div>
                 <div id=article class="grid_9"> 
    
-                    <input class="fw" type="text" value="Name (if applicable):"/>
-                    <input class="fw" type="text" value="Principal Investigator:"/>
-                    <input class="fw" type="text" value="Co Investigators:"/>
-                    <input class="hw fl" type="text" value="Dept/Service:"/>
-                    <input class="hw fl" type="text" value="Division/Unit"/>
-
+             
+                     <div class="grid_3 formLabel">Name (if applicable):</div><input class="grid_5" name="InfoName:" type="text"/>
+                 <input class="clear" />
+                     <div class="grid_3 formLabel">Principal Investigator:</div><input class="grid_5" name="InfoPrincipalInvestigator" type="text"/>
+                  
+                     <div class="grid_2 formLabel">Co Investigators:</div><input class="grid_6" name="InfoCoInvestigators" type="text"/>
+                   
+                     <div class="grid_2 formLabel">Dept/Service:</div><input class="grid_6" name="InfoDept/Service" type="text"/>
+             
+                     <div class="grid_2 formLabel">Division/Unit</div><input class="grid_6" name="InfoDivision/Unit" type="text"/>
                     <br /> 
                     
                  
@@ -87,17 +95,17 @@
                
                 <input class="clear" />
                     <div class="grid_4">
-                        <input type="checkbox" value="Responsible Treating Physician (if different from PI)"/>Responsible Treating Physician (if different from PI)<br />   
-                        <input type="checkbox" value="Co-Investigator"/>"Co-Investigator"<br /> 
-                        <input type="checkbox" value="Research Coordinator"/>Research Coordinator<br /> 
-                        <input type="checkbox" value="Non-study Staff"/>Non-study Staff<br /> 
+                        <input type="checkbox"name="chk1" value="Responsible Treating Physician (if different from PI)"/>Responsible Treating Physician (if different from PI)<br />   
+                        <input type="checkbox"name="chk2"  value="Co-Investigator"/>"Co-Investigator"<br /> 
+                        <input type="checkbox"  name="chk3"value="Research Coordinator"/>Research Coordinator<br /> 
+                        <input type="checkbox" name="chk4" value="Non-study Staff"/>Non-study Staff<br /> 
                     </div>
 
 
                     <div class="grid_2"> 
-                        <input type="checkbox" value="Data Coordinator/Manager"/> Data Coordinator/Manager<br />
-                        <input type="checkbox" value="Research Nurse"/> Research Nurse<br /> 
-                        <input class="qw" type="text" value="Other, specify:" sp<br />
+                        <input type="checkbox"name="chk5" value="Data Coordinator/Manager"/> Data Coordinator/Manager<br />
+                        <input type="checkbox" name="chk6"value="Research Nurse"/> Research Nurse<br /> 
+                        <div class="grid_2"></div><div class="grid_2 formLabel">Other, specify:</div><input class="grid_4" name="Other, specify:" type="text"/>
                     </div>
 
                     <input class="clear" />
@@ -110,33 +118,37 @@ credentials similar individuals.)
 </p>
 <input class="clear" />
                </div>           
-                       <input class="fw" type="text" value="Mailing Address"/>
-                    <input class="fw" type="text" value="E-mail Address"/>
-                    <input class="grid_3 alpha" type="text" value="Telephone"/>
-                    <input class="grid_3" type="text" value="Pager:"/>
-                    <input class="grid_3 omega" type="text" value="Fax:"/>
+                      
+                    <div class="grid_2 formLabel">Mailing Address</div><input class="grid_6" name="InfoMailing Address" type="text"/>
+                    <div class="grid_2 formLabel">E-mail Address</div><input class="grid_6" name="InfoE-mailAddress" type="text"/>
+                    <div class="grid_2 formLabel">Telephone</div><input class="grid_6" name="InfoTelephone" type="text"/>
+                    <div class="grid_2 formLabel">Pager:</div><input class="grid_6" name="InfoPager" type="text"/>
+                    <div class="grid_2 formLabel">Fax:</div><input class="grid_6" name="InfoFax" type="text"/>
                </div> 
+               </div>
+               
+               
+               
                 <input class="clear" />
-                    <div class="grid_9"> 
-                <h3 class="fw bgllGray"> CONFIRMATION </h3>
-                </div>
-                     <div id="article" class="grid_9">
+                <h3 class="grid_9 bgllGray">CONFIRMATION</h3>
+                
+               <div id="article" class="grid_9 omega">
                      <p>As a member of the study staff on this protocol, I certify the following:</p>
                      <input class="clear" />
-           <input type="checkbox" id="chk1" /> <label for="chk1">I have reviewed this protocol and acknowledge my participation;</label>
+           <input type="checkbox" id="chk1" name="chk7" /> <label for="chk1">I have reviewed this protocol and acknowledge my participation;</label>
             <input class="clear" />
-           <input type="checkbox" id="Checkbox1" /> <label for="chk1"> I have completed the online CITI exam </label>
+           <input type="checkbox" id="Checkbox1"name="chk8" />  <label for="chk1"> I have completed the online CITI exam </label>
             <input class="clear" />
-           <input type="checkbox" id="Checkbox2" /> <label for="chk1">I have included written documentation that I have completed Human Subjects Research training and
+           <input type="checkbox" id="Checkbox2"name="chk9" /> <label for="chk1">I have included written documentation that I have completed Human Subjects Research training and
 HIPAA training at another institution (for non-BIDMC study personnel);</label>
  <input class="clear" />
-           <input type="checkbox" id="Checkbox3" /> <label for="chk1">For research activities involving access to and use of medical record information, all medical data
+           <input type="checkbox" id="Checkbox3"name="chk10" /> <label for="chk1">For research activities involving access to and use of medical record information, all medical data
 relating to, and identifying an individual patient will be kept confidential and will not be disclosed to any other person or organization without prior written consent of the CCI, including reports or
 publications about the research study.Furthermore, neither subjects nor their families will be
 contacted without first obtaining approval from the CCI unless the PI is also the attending physician
 for the subject;</label>
 
- <input type="checkbox" id="Checkbox4" /> <label for="chk1">I accept responsibility for assuring adherence to applicable federal and state research regulations,
+ <input type="checkbox" id="Checkbox4" /> <label for="chk11">I accept responsibility for assuring adherence to applicable federal and state research regulations,
 BIDMC policies, and CCI policies relative to the protection of the right and welfare of subjects
 enrolled this study.</label>
                     </div>  
@@ -154,12 +166,12 @@ other entity related to this study (e.g., contract research organization, peer r
 which research specimens are being referred)?</p>
 <input class="clear" />   
 <div class="grid_1">
-  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  <input type="checkbox" name="chk12"value="YES"/><strong>    YES</strong><br /> 
   </div>
 <div class="grid_2">
-<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+<input type="checkbox" name="chk13"value="NO"/><strong>    NO</strong><br /> 
   </div>
-  <input class="clear" />   
+  <input class="clear" name="chk14"/>   
   <div class="grid_9">
   <p>If YES, please check all of the following that apply:</p>
   </div>
@@ -182,18 +194,18 @@ which research specimens are being referred)?</p>
  
  
    <input type="checkbox" value="Consulting (paid or unpaid)"/>Consulting (paid or unpaid)<br /> 
-                        <input type="checkbox" value="Executive or other management position"/>Executive or other management position<br /> 
-                        <input type="checkbox" value="Other employment position"/>Other employment position<br /> 
-                        <input type="checkbox" value="Member of board of Directors (voting or nonvoting)"/>Member of board of Directors (voting or nonvoting)<br />   
-                        <input type="checkbox" value="Member of Scientific Advisory Board or other board(paid or unpaid)"/>Member of Scientific Advisory Board or other board(paid or unpaid)<br /> 
-                        <input type="checkbox" value="Stock, stock option, partnership share, other ownership interest"/>Stock, stock option, partnership share, other ownership interest<br /> 
-                        <input type="checkbox" value="Royalties or license fees"/>Royalties or license fees<br /> 
-                        <input type="checkbox" value="Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value"/>Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value<br />   
-                        <input type="checkbox" value="Author of papers, conducted lectures or teaching engagements (paid or unpaid)"/>Author of papers, conducted lectures or teaching engagements (paid or unpaid)<br /> 
-                        <input type="checkbox" value="Gifts or gratuities"/>Gifts or gratuities<br /> 
-                        <input type="checkbox" value="Loans or lease relationships (e.g., space, equipment, or personnel)"/>Loans or lease relationships (e.g., space, equipment, or personnel)<br /> 
+                        <input type="checkbox"name="chk14" value="Executive or other management position"/>Executive or other management position<br /> 
+                        <input type="checkbox"name="chk15" value="Other employment position"/>Other employment position<br /> 
+                        <input type="checkbox"name="chk16" value="Member of board of Directors (voting or nonvoting)"/>Member of board of Directors (voting or nonvoting)<br />   
+                        <input type="checkbox"name="chk17" value="Member of Scientific Advisory Board or other board(paid or unpaid)"/>Member of Scientific Advisory Board or other board(paid or unpaid)<br /> 
+                        <input type="checkbox"name="chk18" value="Stock, stock option, partnership share, other ownership interest"/>Stock, stock option, partnership share, other ownership interest<br /> 
+                        <input type="checkbox"name="chk19" value="Royalties or license fees"/>Royalties or license fees<br /> 
+                        <input type="checkbox" name="chk20"value="Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value"/>Intellectual Property Rights (e.g., patents, copyrights, trademark), regardless of value<br />   
+                        <input type="checkbox"name="chk21" value="Author of papers, conducted lectures or teaching engagements (paid or unpaid)"/>Author of papers, conducted lectures or teaching engagements (paid or unpaid)<br /> 
+                        <input type="checkbox" name="chk22"value="Gifts or gratuities"/>Gifts or gratuities<br /> 
+                        <input type="checkbox"name="chk23" value="Loans or lease relationships (e.g., space, equipment, or personnel)"/>Loans or lease relationships (e.g., space, equipment, or personnel)<br /> 
                         <input class="qw invisible" type="text" value="Name (if applicable):"/>
-                        <input class="hw" type="text" value="Other:"/>
+                        <div class="grid_1 formLabel">Other:</div><input class="grid_4" name="ConflictOther" type="text"/>
   <input class="clear" /> 
 
 <p><strong>B.     </strong>   Do you or any member of your immediate family (parent, spouse, sibling, child or anyone else
@@ -202,10 +214,10 @@ sponsor or any other entity related to this study (e.g., contract research organ
 laboratory to which specimens are being referred)?</p>
 <input class="clear" />   
 <div class="grid_1">
-  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  <input type="checkbox" name="chk24"value="YES"/><strong>    YES</strong><br /> 
   </div>
 <div class="grid_2">
-<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+<input type="checkbox" name="chk25"value="NO"/><strong>    NO</strong><br /> 
 </div>
 <input class="clear" />   
 <p><strong>C.     </strong>   
@@ -213,32 +225,29 @@ To the best of your knowledge, does BIDMC have a financial interest in the outco
 research?</p>
 <input class="clear" />  
 <div class="grid_1">
-  <input type="checkbox" value="YES"/><strong>    YES</strong><br /> 
+  <input type="checkbox" name="chk26"value="YES"/><strong>    YES</strong><br /> 
   </div>
 <div class="grid_2">
-<input type="checkbox" value="NO"/><strong>    NO</strong><br /> 
+<input type="checkbox" name="chk27"value="NO"/><strong>    NO</strong><br /> 
 </div>
- <input class="fw" type="text" value="If yes, please describe:" />
+<input class="clear" />   
+ <div class="grid_3 formLabel">If yes, please describe:</div><input class="grid_5" name="ConflictDescribe" type="text"/>
   </div>
    <input class="clear" /> 
   <div class="grid_9">
   <p>By my signature below, I certify that I have completed this form truthfully and to the best of my knowledge.
 Further, I understand that it is my obligation to update this form promptly if there is any change.</p>
   </div>
-  <div class="grid_6">
-   <input class="fw" type="text" value="Signature:" />
-  </div>
-  <div class="grid_3">
-  <input class="fw" type="text" value="Date:" />
-  </div>
-  <div class="grid_6">
-  <input class="fw" type="text" value="Print Name:" />
-  </div>
+   <input class="clear" /> 
  
-  
-
+   <div class="grid_2 formLabel">Signature:</div><input class="grid_5" name="Sig" type="text"/>
+   <input class="clear" /> 
+  <div class="grid_2 formLabel">Date:</div><input class="grid_5" name="Dat" type="text"/>
+  <input class="clear" /> 
+  <div class="grid_2 formLabel">Print Name:</div><input class="grid_5" name="PrintName" type="text"/>
+   <input class="clear" /> 
             </div>
-            </div>
+           
                
               
                 
