@@ -192,8 +192,14 @@ function testEditFormA(){
 	return true;
 }
 
-function testGetForm(){
-	console.log("OH GOD YOU DIDN'T WRITE THE TEST AND IT'S DEMO DAY YOU IDIOT");
+function testGetApplication()
+{
+	console.log("There is no test for get application yet...");
+}
+
+function testGetFormA()
+{
+	console.log("You still gotta do dat there test function for dat get form A brah");
 }
 
 //Vars for testGetFormA:
