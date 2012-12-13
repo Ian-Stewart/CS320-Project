@@ -2,63 +2,82 @@ Form "A" Input Field Names:
 
 //Part A1. Title of Proposal
 //div id == A1
-Title of proposal                               : title
-Short title                                          : shortTitle
+//Everything is a text box
+Title of proposal                                   : title
+Short title                                         : shortTitle
 
 //Part A2. Research Staff Information
 //div id == A2
-Principal Investigator's name           : pIName
-        Department                              : pIDepartment
+//Everything is a text box
+Principal Investigator's name                       : pIName
+        Department                                  : pIDepartment
         Division                                    : pIDivision
-        PI's chief of dept/division        : pIChief
-        PI's BIDMC Mailing Address     : pIMail
-        PI's E-Mail Address                  : pIEmail
-        PI's Telephone                         : pIPhone
-        PI's Pager                                 : pIPager
-        Fax                                           : pIFax
+        PI's chief of dept/division                 : pIChief
+        PI's BIDMC Mailing Address                  : pIMail
+        PI's E-Mail Address                         : pIEmail
+        PI's Telephone                              : pIPhone
+        PI's Pager                                  : pIPager
+        Fax                                         : pIFax
 
 //Still part A2, but subsection for co-investigators
-Names of all Co-Investigators         : cINames
+//One single text box. 
+//note: Will have to extract list of names somehow - regex?
+Names of all Co-Investigators                       : cINames
 
 //Still part A2, but subsection for the main contact.
-Data Coordinator/Contact Person     : dCName
-        Mailing Address                        : dCMail
-        Email Address                           : dCEmail
-        Telephone                                : dCPhone
-        Pager                                        : dCPager
-        Fax                                            : dCFax
+//Everything is a text box
+Names of all Co-Investigators                       : cINames
+Data Coordinator/Contact Person                     : dCName
+        Mailing Address                             : dCMail
+        Email Address                               : dCEmail
+        Telephone                                   : dCPhone
+        Pager                                       : dCPager
+        Fax                                         : dCFax
 
 //Part A3. Basic Study Type and Design Information
-Therapeutic                                        : study1
-Pilot                                                    : study2
-Discarded Tissue                                : study3
-Creating a Data/Tissue Repository     : study4
+//div id == A3
+//Everything except studyOtherString is a checkbox
+Therapeutic                                         : study1
+Pilot                                               : study2
+Discarded Tissue                                    : study3
+Creating a Data/Tissue Repository                   : study4
 
-Diagnostic                        	           : study5
-Survey                            	           : study6
-Genetic Research                               : study7
-Program Evaluation                            : study8
+Diagnostic                        	                : study5
+Survey                            	                : study6
+Genetic Research                                    : study7
+Program Evaluation                                  : study8
 
-Edidemiologic                        	           : study9
-Registry                                              : study10
-Gene Transfer                                    : study11
-Focus Groups                                      : study12
+Edidemiologic                        	            : study9
+Registry                                            : study10
+Gene Transfer                                       : study11
+Focus Groups                                        : study12
 
-Physiologic                                          : study13
-Medical Record Review                       : study14
-Educational Research                          : study15
-Other(explain)                                     : studyOther
+Physiologic                                         : study13
+Medical Record Review                               : study14
+Educational Research                                : study15
+Other(explain)                                      : studyOther
+<String entered into "explain">                     : studyOtherString
 
 //Still part A3, but subsection for Design (if applicable)
-Randomized                                        : design1
-Blind                                                    : design2
-Double-Blind                                      : design3
+// All checkboxes
 
-//Still part A3, but subsection for Phase (if applicable).
-1                                                         : phase1
-1/2                                                     : phase1_2
-2                                                         : phase2
-2/3                                                     : phase2_3
-3                                         	           : phase3
-4                                	           : phase4
-Other(explain)                     	           : phaseOther
+Randomized                                          : design1
+Blind                                               : design2
+Double-Blind                                        : design3
+
+//Still part A3, but subsection for Phase (if applicable)
+//Everything except phaseOtherString is a checkbox
+
+1                                                   : phase1
+1/2                                                 : phase1_2
+2                                                   : phase2
+2/3                                                 : phase2_3
+3                                                   : phase3
+4                                	                : phase4
+Other(explain)                     	                : phaseOther
+<String entered into "explain">                     : phaseOtherString
+
+//Still part A3, but subsection for placebo control
+//Both are checkboxes
+"Yes"			                                    : placebo1
+"No"			                                    : placebo2

@@ -129,7 +129,9 @@ exports.deleteUser = function(user, callback)
 // APPLICATION RELATED FUNCTIONS
 //
 
-//gets all of the applications whose PI is the specified user. Takes usersEntry object, Value is array of applicationsEntry objects.
+//gets all of the applications whose PI is the specified user. 
+//Takes usersEntry object 
+//Value is array of applicationsEntry objects.
 exports.retrieveAllApplicationsForPI = function(user, callback)
 {
     conn.query("SELECT * FROM Applications WHERE uid=?", user.uid, function(err, result)
@@ -145,3 +147,19 @@ exports.retrieveAllApplicationsForPI = function(user, callback)
     });
 }
 
+//Gets an application given an application Id
+exports.getApplication = function(aid,callback)
+{
+    conn.query("SELECT * FROM Applications WHERE aid=?",aid,function(err,result)
+    {
+        if(err)
+        {
+            callback({status:false,value: undefined,ErrMsg:"Database Errpr"});
+        }
+        else
+        {
+            callback({status:true, value:result,ErrMsg:undefined});
+        }
+
+    });
+}

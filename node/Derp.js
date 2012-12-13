@@ -184,7 +184,7 @@ function testEditFormA(){
 		return false;	
 	}
 	var testC = DAL.editFormA(invalid_form2);//Test submitting a form with an invalid field
-	if(testB !== invalid_form){
+	if(testC !== invalid_form){
 		console.log("Invalid form submit fail");
 		return false;	
 	}
@@ -234,21 +234,129 @@ function testGetFormA(){
 	return true;
 }
 
+//vars for testCreateApplication:
+var valid_application1{//valid full board application
+	long_title:"This long title is much shorter than the form long titles",
+	short_title:"A more normal length title",
+	full_board:true,
+	applicationID:1
+}//end valid_application1
+
+var valid_application2{//valid expedited application
+	long_title:"It is hard to come up with a good long name... maybe I will come up with one later",
+	short_title:"Ishtcuwagln.mIwcuwol",
+	full_board:false,
+	applicationID:2
+}//end valid_application2
+
+var invalid_application1{//application with invalid ID (user with given ID does not have permissions)
+	long_title:"Perhaps I should look up stories for my titles too",
+	short_title:"That is quicker",
+	full_board:true,
+	applicationID:3
+}//end valid_application3
+
+var invalid_application2{//invalid long title (long title already exists in database)
+	long_title:"Why did someone come up with this title before me",
+	short_title:"At least this one is unique",
+	full_board:true,
+	applicationID:4
+}//end valid_application4
+
+var invalid_application3{//invalid short title (short title already exists in database)
+	long_title:"Of course no one else would have taken this title already",
+	short_title:"Shortly taken",
+	full_board:true,
+	applicationID:5
+}
+
+var valid_application_return = {value:true,status:true,ErrMsg:undefined};//Expected return when a valid application was successfully updated in the database
+var invalid_application_return = {value:undefined,value:false,ErrMsg:undefined};//expected return of an invalid application
+
+//test createApplication function
+function testCreateApplication(){
+	console.log("Starting test for createApplication");
+	var testA = DAL.createApplication(valid_application1);//Test if application already exists
+	if(testA !== valid_applicaton_return){
+		console.log("Valid application creation failed");
+		return false;
+	}
+	else{//Uses the getApplication method to verify the application was properly inserted. May fail if getApplication is not working properly, subsequent tests will reveal the correctness of getApplication.
+		if(DAL.getApplication(valid_application1[applicationID] !== valid_application){
+			console.log("Application in database was not stored or returned correctly");
+			return false;
+		}
+	}
+	var testB = DAL.createApplication(valid_application2);
+	if(testB !== valid_application_return){
+		console.log("Valid application creation failed");
+		return false;
+	}
+	else{
+		if(DAL.getApplication(valid_application2[applicationID] !== valid_application){
+			console.log("Application in database was not stored or returned correctly");
+			return false;
+		}
+	}
+	var testC = DAL.createApplication(invalid_application1);
+	if(testC !== invalid_application_return){
+		console.log("Invalid application creation fail");
+		return false;
+	}
+	var testD = DAL.createApplication(invalid_application2);
+	if(testD !== invalid_application_return){
+		console.log("Invalid application creation fail");
+		return false;
+	}
+	var testE = DAL.createApplication(invalid_application3);
+	if(testE !== invalid_application_return){
+		console.log("Invalid application creation fail");
+		return false;
+	}
+	console.log("Test passed!");
+	return true;
+}//end testCreateApplication
+
+//vars for testGetApplication
+var database_application{//This application should be in the database
+	long_title:"A title that already exists in the database, what fun",
+	short_title:"Succinct",
+	full_board:true,
+	applicationID:6
+}//end database_application
+var valid_application_return {value:database_application,status:true,ErrMsg:undefined};//Expected return when a valid application was successfully updated in the database
+var invalid_application_return = {value:undefined,value:false,ErrMsg:undefined};//expected return of an invalid application
+//test getApplication
+function testGetApplication(){
+	console.log("Starting test for getApplication");
+	var testA = DAL.getApplication(database_application[applicationID]);//Test retrieval of application known to exist in database
+	if(testA !== valid_application_return){
+		console.log("Application was not retrieved correctly");
+		return false;
+	}
+	var testB = DAL.getApplication(10);//Test retrieval of application not in database
+	if(testA !== invalid_application_return){
+		console.log("Error in retrieving application");
+		return false;
+	} 
+	console.log("Test passed!");
+	return true;
+}
+
 //Code to call tests
 DAL.connectToDatabase(); //connect to the database
-
-//DAL.testa(123451);//I don't really know what this is supposed to be...
 
 testIsUserValid();
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
+//console.log("Testing createApplication:" + testCreateApplication());
+//console.log("Testing updateApplication:" + testUpdateApplication());
+//console.log("Testing getApplication:" + testGetApplication());
 //console.log("Done with all tests!");.
 
-var printIt = function (obj) { console.log(obj); };
 
-var usersEntry = { uid: 123999, first_name: 'test2', last_name: 'user', email: "123@abc.net", telephone: "11231231234", pager_number: "1231231234", fax: "11231231234" };
-
-
-
+//var printIt = function (obj) { console.log(obj); };
+//DAL.isUserValid(vuser, vpass, printIt);
+//DAL.isUserValid(vuser, ivpass, printIt);
 
 
