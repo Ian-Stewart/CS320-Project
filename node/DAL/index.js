@@ -32,7 +32,7 @@ exports.connectToDatabase = function()
 //
 
 //Checks if the specified user is valid. Takes username and password. Value is boolean.
-exports.isUserValid = function(user, pass, callback)
+exports.isUserValid = function(username, pass, callback)
 { 
     conn.query("SELECT password FROM Logins WHERE u_name = ?", user, function(err, result) 
     {
@@ -55,7 +55,7 @@ exports.isUserValid = function(user, pass, callback)
 }
 
 //retrieve all users returns a list of all users. Takes nothing, Value is array of usersEntry objects.
-exports.retrieveAllUsers = function(callback)
+exports.retrieveAllUsers = function(username,callback)
 {
     conn.query("SELECT * FROM Users", function(err, result)
     {
@@ -71,7 +71,7 @@ exports.retrieveAllUsers = function(callback)
 }
 
 //adds a user to the database. Takes usersEntry object, Value is undefined.
-exports.createNewUser = function(user, callback)
+exports.createNewUser = function(username, callback)
 {
     conn.query("INSERT INTO Users SET ?", user, function(err, result)
     {
@@ -87,7 +87,7 @@ exports.createNewUser = function(user, callback)
 }
 
 //replaces the current user information with whatever is in the given object. Takes usersEntry object, Value is undefined. NOTE: This method does absolutely no validation!
-exports.editUser = function(user, callback)
+exports.editUser = function(username, callback)
 {
     conn.query("UPDATE Users SET ? WHERE uid=?", [user, user.uid], function(err, result)
     {
@@ -103,7 +103,7 @@ exports.editUser = function(user, callback)
 }
 
 //deletes the specified user from the database. Takes usersEntry object, Value is undefined. NOTE: This method does almost no validation aside from a basic sanity check on UID.
-exports.deleteUser = function(user, callback)
+exports.deleteUser = function(username, callback)
 {
     if(!user.uid || user.uid < 0 || user.uid === "") //basic sanity checking on UID
     {
@@ -128,24 +128,6 @@ exports.deleteUser = function(user, callback)
 //
 // APPLICATION RELATED FUNCTIONS
 //
-
-//gets all of the applications whose PI is the specified user. 
-//Takes usersEntry object 
-//Value is array of applicationsEntry objects.
-exports.retrieveAllApplicationsForPI = function(user, callback)
-{
-    conn.query("SELECT * FROM Applications WHERE uid=?", user.uid, function(err, result)
-    {
-        if(err)
-        {
-            callback({status: false, value: undefined, ErrMsg: "Database Error"});
-        }
-        else
-        {
-            callback({status: true, value: result, ErrMsg: undefined});
-        }
-    });
-}
 
 exports.editApplication = function(application, callback)
 {
@@ -216,25 +198,65 @@ exports.retrieveFormA = function(aid,callback)
 
 //Note: may want to revisit these to verify that the user given is actually a CCI/IRB etc
 //Retrieves all applications for a given PI
-exports.retrieveApplicationForPI = function(username)
+exports.retrieveApplicationsForPI = function(username,callback)
 {
-
+    conn.query("SELECT aid, proposalTitle FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
+    {
+        if(err)
+        {
+            callback({status:false,value:undefined,ErrMsg:"Database Error"});
+        }
+        else
+        {
+            callback({status:true,value:result,ErrMsg:undefined});
+        }
+    });
 }
 
 //Retrieves all applications for a given CCI
-exports.retrieveApplicationsForCCI = function(username)
+exports.retrieveApplicationsForCCI = function(username,callback)//Username is currently not used
 {
-
+    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = CCI",function(err,result)
+        {
+            if(err)
+            {
+                callback({status:false,value:undefined,ErrMsg:"Database Error"});
+            }
+            else
+            {
+                callback({status:true,value:result,ErrMsg:undefined});
+            }
+        });
 }
 
 //Retrieves all applications for a given IRB
-exports.retreiveApplicationsForIRB = function (username)
+exports.retreiveApplicationsForIRB = function (username,callback)//Username is currently not used
 {
-
+    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = IRB",function(err,result)
+        {
+            if(err)
+            {
+                callback({status:false,value:undefined,ErrMsg:"Database Error"});
+            }
+            else
+            {
+                callback({status:true,value:result,ErrMsg:undefined});
+            }
+        });
 }
 
 //Retrieves all archived applications created by a given user
-exports.retrieveArchivedApplicationsForUser = function(username)
+exports.retrieveArchivedApplicationsForUser = function(username,callback)
 {
-    //conn.query("SELECT * FROM FormA WHERE u_name"{});
+    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE editState = archived AND username = ?",username,function(err,result)
+        {
+            if(err)
+            {
+                callback({status:false,value:undefined,ErrMsg:"Database Error"});
+            }
+            else
+            {
+                callback({status:true,value:result,ErrMsg:undefined});
+            }
+        });
 }
