@@ -204,6 +204,35 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/javascript">
+
+            function compileForms(){
+                var inputs = $("input");
+                var inputData = new Array();
+                for(var data in inputs) {
+                    data = inputs[data];
+                    inputData.push({"name": $(data).attr("name"), "value" : $(data).attr("value")});
+                }
+                console.log(inputData);
+            }
+
+            compileForms();
+
+            function test(){
+                 $.ajax({
+                    type: 'get',
+                    url: '/createApplication',
+                    data: {'token': '1',
+                    'formID': '12345'},
+                    dataType: "json",
+                    success: function(data) {
+                    console.log(data);
+                    }
+                    });      
+                 }
+
+                 test();
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
