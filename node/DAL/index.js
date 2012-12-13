@@ -145,3 +145,50 @@ exports.retrieveAllApplicationsForPI = function(user, callback)
     });
 }
 
+exports.editApplication = function(application, callback)
+{
+    conn.query("UPDATE Applications SET ? WHERE aid=?", [application, application.aid], function(err, result)
+    {
+        if(err)
+        {
+            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+        }
+        else
+        {
+            callback({status: true, value: undefined, ErrMsg: undefined});
+        }
+    });
+}
+
+exports.getForm = function(aid, callback)
+{
+    conn.query("SELECT * FROM Forms WHERE aid=?", aid, function(err, result)
+    {
+        if(err)
+        {
+            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+        }
+        else
+        {
+            callback({status: true, value: result, ErrMsg: undefined});
+        }
+    });
+}
+
+exports.saveForm = function(form, callback)
+{
+    conn.query("UPDATE Forms SET ? WHERE aid=?", [form, form.aid], function(err, result)
+    {
+        if(err)
+        {
+            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+        }
+        else
+        {
+            callback({status: true, value: undefined, ErrMsg: undefined});
+        }
+    });
+}
+
+
+
