@@ -129,7 +129,9 @@ exports.deleteUser = function(user, callback)
 // APPLICATION RELATED FUNCTIONS
 //
 
-//gets all of the applications whose PI is the specified user. Takes usersEntry object, Value is array of applicationsEntry objects.
+//gets all of the applications whose PI is the specified user. 
+//Takes usersEntry object 
+//Value is array of applicationsEntry objects.
 exports.retrieveAllApplicationsForPI = function(user, callback)
 {
     conn.query("SELECT * FROM Applications WHERE uid=?", user.uid, function(err, result)
@@ -160,20 +162,6 @@ exports.editApplication = function(application, callback)
     });
 }
 
-exports.getForm = function(aid, callback)
-{
-    conn.query("SELECT * FROM Forms WHERE aid=?", aid, function(err, result)
-    {
-        if(err)
-        {
-            callback({status: false, value: undefined, ErrMsg: "Database Error"});
-        }
-        else
-        {
-            callback({status: true, value: result, ErrMsg: undefined});
-        }
-    });
-}
 
 exports.saveForm = function(form, callback)
 {
@@ -190,5 +178,39 @@ exports.saveForm = function(form, callback)
     });
 }
 
+
+//Gets an application given an application Id
+exports.getApplication = function(aid,callback)
+{
+    conn.query("SELECT * FROM Applications WHERE aid=?",aid,function(err,result)
+    {
+        if(err)
+        {
+            callback({status:false,value: undefined,ErrMsg:"Database Error"});
+        }
+        else
+        {
+            callback({status:true, value:result,ErrMsg:undefined});
+        }
+
+    });
+}
+
+//Gets an application's form A
+//Takes an application Id
+exports.getFormA = function(aid,callback)
+{
+    conn.query("SELECT * FROM FormA WHERE aid=?",aid,function(err,result)
+    {
+        if(err)
+        {
+            callback({status:false,value: undefined,ErrMsg:"Database Error"});
+        }
+        else
+        {
+            callback({status:true,value:result,ErrMsg:undefined});
+        }
+    });
+}
 
 
