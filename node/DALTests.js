@@ -162,44 +162,81 @@ A13:undefined,
 A14:undefined
 }//End invalid_form2
 
-var invalid_form = {value:undefined,status:false,ErrMsg:"Invalid form"};//Expected return when the form cannot be inserted into database
-var valid_form = {value:true,status:true,ErrMsg:undefined};//Expected return when the form was successfully updated in the database
-//Tests the editFormA function
-function testEditFormA(){
-	console.log("Starting test for editFormA");
-	var testA = DAL.editFormA(valid_form);//Test submitting a valid form that the database should accept and verifies it was actually inserted into the database
-	if(testA !== valid_form){
-		console.log("Valid form submit fail");
-		return false;
-	}
-	else{//Uses the getFormA method to verify the form was properly inserted. May fail if getFormA is not working properly, subsequent tests will reveal the correctness of getFormA.
-		if(DAL.getFormA(valid_form[formID]) !== valid_form){
-			console.log("Form in database was not stored or returned correctly");
-			return false;
-		}
-	}
-	var testB = DAL.editFormA(invalid_form1);//Test submitting a blank form
-	if(testB !== invalid_form){
-		console.log("Invalid form submit fail");
-		return false;	
-	}
-	var testC = DAL.editFormA(invalid_form2);//Test submitting a form with an invalid field
-	if(testB !== invalid_form){
-		console.log("Invalid form submit fail");
-		return false;	
-	}
-	console.log("Test passed!");
-	return true;
-}
+
+var generic_app = {
+	aid:"101",
+	rid: 0.0,
+	proposalTitle:"Why is aid a varchar?",
+	username: "rms",
+	lastEditBy:"SnapCracklePop"
+};
+
+var app_Returned = {value:generic_app,status:true,ErrMsg:undefined};
 
 function testRetrieveApplication()
 {
-
+exports.retrieveApplication = function(username,aid,callback)
+	console.log("Starting test for Retrieve Application");
+	var testA = DAL.retrieveApplication("USER","101",function(results)
+	{
+		if(JSON.encode(result) === JSON.encode(app_Returned)
+		{
+			console.log("Valid application test passed. Expected " + app_Returned + ", got " + results);
+		}
+		else
+		{
+			console.log("Valid application test failed. Expected " + app_Returned + ", got " + results);
+		}
+	});//Does 101 need to be wrapped in quotation marks?
+	var testB = DAL.retrieveApplication("USER","404",function(results)
+	{
+		if(results[0])
+		{
+			console.log("Invalid application retrieval test failed. Expected null, got " + results[0]);
+		}
+		else
+		{
+			console.log("Invalid application retrieval test passed. Expected null, got null");
+		}
+	});
 }
+
+var generic_forma = {
+	username:"rms",
+	lastEditBy:"tidus",
+	proposalTitle:"The effects of dubstep on human mental health",
+	shortTitle:"Dubstep on Humans",
+	formA2:"",
+	formA3:"",
+	formA4:"",
+	formA5:"",
+	formA6:"",
+	formA7:"",
+	formA8:"",
+	formA9:"",
+	formA10:"",
+	formA11:"",
+	formA12:"",
+	formA13:"",
+};
+ var formA_returned = {status: true, value: generic_forma, ErrMsg:undefined};
+ var formA_invalid = {status: false, value: undefined, ErrMsg: "Database Error"};
+
 
 function testRetrieveFormA()
 {
-
+	console.log("Starting test for Retrieve Form A");
+	var testA = DAL.retrieveFormA("USER","101",function(results)
+	{
+		if(JSON.encode(result) === JSON.encode(formA_returned))
+		{
+			console.log("Test for retrieve valid form A passed. Expected " + formA_returned + ", got " + result);
+		}
+		else
+		{
+			console.log("Test for retrieve valid form A failed. Expected " + formA_returned + ", got " + result);
+		}
+	});
 }
 
 function testRetrieveApplicationsForPI()
