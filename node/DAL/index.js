@@ -2,8 +2,14 @@ var mysql = require('mysql');
 
 var connInfo = 
 {
+    //vicky
     host: 'instance33534.db.xeround.com',
     port: 14675,
+    
+    //warren
+    //host: 'instance34196.db.xeround.com',
+    //port: 16062,
+
     user: 'user',
     password: 'cs320',
     database: 'mtt'
