@@ -509,14 +509,14 @@ DAL.connectToDatabase(); //connect to the database
 
 //DAL.testa(123451);//I don't really know what this is supposed to be...
 
-//testIsUserValid();
-//testEditFormA();
-//testRetrieveApplication();
-//testRetrieveFormA();
-//testRetrieveApplicationsForPI();
-//testRetrieveApplicationsForCCI();
-//testRetrieveApplicationsForIRB();
-//testRetrieveArchivedApplicationsForUser();
+testIsUserValid();
+testEditFormA();
+testRetrieveApplication();
+testRetrieveFormA();
+testRetrieveApplicationsForPI();
+testRetrieveApplicationsForCCI();
+testRetrieveApplicationsForIRB();
+testRetrieveArchivedApplicationsForUser();
 testSaveFormA();
 
 //console.log("Testing editFormA:" + testEditFormA());
