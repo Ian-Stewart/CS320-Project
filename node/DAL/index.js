@@ -258,7 +258,7 @@ exports.retrieveApplication = function(username,aid,callback)
         }
         else
         {
-            callback({status:true, value:result,ErrMsg:undefined});
+            callback({status:true, value:result[0],ErrMsg:undefined});
         }
 
     });
@@ -276,7 +276,7 @@ exports.retrieveFormA = function(username,aid,callback)
         }
         else
         {
-            callback({status:true,value:result,ErrMsg:undefined});
+            callback({status:true,value:result[0],ErrMsg:undefined});
         }
     });
 }

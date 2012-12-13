@@ -16,24 +16,20 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(require('connect').bodyParser());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.configure('development', function(){
-  app.use(express.errorHandler());
-});
-
-app.get('/', routes.index);
+app.post('/', routes.index);
 
 /*
 Description:  Public Function called by the content module, returns the revision history for a particular form based on its FormID.
 calls getRevisions(form)
 */
 
-app.get('/getFormHistory', function(req, res) {
+app.post('/getFormHistory', function(req, res) {
   var formHistory = model.getRevisions(req.query.token, req.query.formID)
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -47,7 +43,7 @@ Description:  Public Function called by the content module, returns the comments
 calls getForm(form)
 */
 
-app.get('/getFormComments', function(req, res){
+app.post('/getFormComments', function(req, res){
   var formComments = model.getForm(req.query.token, req.query.formID);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -61,7 +57,8 @@ Description:  Public Function called by the content module, returns the full set
 calls retrieveAllFormsForApplication()
 */
 
-app.get('/getApplicationForms', function(req, res){
+app.post('/getApplicationForms', function(req, res){
+    console.log(req);
   var forms = model.getForm(req.query.token, req.query.applicationID);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -74,7 +71,7 @@ Description:  Public Function called by the content module, sends pertinent info
 calls createNewApplication() and
 */
 
-app.get('/createApplication', function(req, res){
+app.post('/createApplication', function(req, res){
   var result = model.createNewApplication(req.query.token);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -88,7 +85,7 @@ Description:  Public Function called by the content module, passes updated form 
 calls saveForm(form,formObjectJSON)
 */
 
-app.get('/saveForm', function(req, res){
+app.post('/saveForm', function(req, res){
   var result = model.saveForm(req.query.token, req.query.form);
 
   console.log(result);
@@ -103,7 +100,7 @@ Description:  Public function called by the content module, passes username, app
 calls delegateApplication(user_a, user_b, applicationID)
 */
 
-app.get('/delegateApplication', function(req, res){
+app.post('/delegateApplication', function(req, res){
   var result = model.delegateApplication(req.query.token, req.query.username, req.query.applicationID, req.query.formID);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -122,7 +119,7 @@ Description:  Public function called by the content module, passes applicationID
 calls editUser(username, userObjectJSON) and createNewUser(username, userObjectJSON)
 */
 
-app.get('/AddCIs', function(req, res){
+app.post('/AddCIs', function(req, res){
   var result = model.addCIs(req.query.Token, req.query.ApplicationID, req.query.CIList);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -141,7 +138,7 @@ Description:  Public function called by the content module, passes applicationID
 calls removeForms()
 */
 
-app.get('/RemoveForms', function(req, res){
+app.post('/RemoveForms', function(req, res){
   var result = model.removeForms(req.query.token, req.query.applicationID, req.query.formIDs);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -155,7 +152,7 @@ Description:  Public function called by the content module, passes applicationID
 calls changeApplicationStatus(applicationID, status)
 */
 
-app.get('/AcceptApplication', function(req, res){
+app.post('/AcceptApplication', function(req, res){
   var result = model.changeApplicationStatus(req.query.token, req.query.applicationID, "Accepted");
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -182,7 +179,7 @@ Description:  Public function called by the content module, passes applicationID
 calls changeApplicationStatus(applicationID, status)
 */
 
-app.get('/RejectApplication', function(req, res){
+app.post('/RejectApplication', function(req, res){
   var result = model.changeApplicationStatus(req.query.token, req.query.applicationID, "Rejected");
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -209,7 +206,7 @@ Description:  Public function called by the content module, passes applicationID
 calls editUser(username, useObjectJSON)
 */
 
-app.get('/DelegateReview', function(req, res){
+app.post('/DelegateReview', function(req, res){
   var result = model.addAsReviewer(req.query.token, req.query.applicationID, req.query.reviewers);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -227,7 +224,7 @@ app.get('/DelegateReview', function(req, res){
 Description:  Public function called by the content module, passes user data to the request handler which adds a user account from the given data.
 calls createNewUser(username, userObjectJSON)
 */
-app.get('/CreateAccount', function(req, res){
+app.post('/CreateAccount', function(req, res){
   var result = model.createNewUser(req.query.userData.username, req.query.userData);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -248,7 +245,7 @@ Description:  Public function called by the content module, passes a formID to t
 calls submitForm(formID, username)
 */
 
-app.get('/SubmitApplication', function(req, res){
+app.post('/SubmitApplication', function(req, res){
   var result = model.submitApplication(req.query.token, req.query.applicationID)
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -273,7 +270,7 @@ app.get('/SubmitApplication', function(req, res){
 Description:  Public function called by the content module, passes applicationID and list of users to the request handler which associates the users with the given application as requested CIs. It also sends a request to the notification module to send notifications to the potential CIs.
 calls editUser(user, userObjectJSON)*/
 
-app.get('/RequestCollaboration', function(req, res){
+app.post('/RequestCollaboration', function(req, res){
   result = model.addPotentialCI(req.query.token, req.query.applicationID, req.query.ciList);
 
   res.writeHead(200, {'content-type': 'text/json' });
@@ -288,5 +285,5 @@ app.get('/RequestCollaboration', function(req, res){
 
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Express server listening on port " + app.get:('port'));
 });
