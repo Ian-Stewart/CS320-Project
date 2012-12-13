@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-               <input class="grid_4" type="button" name="submit" value="Submit"/> 
+               <input class="grid_4" type="button" id="submit" value="Submit"/> 
 
 
         </div>
@@ -192,9 +192,16 @@
                     data = inputs[data];
                     inputData[ $(data).attr("name")] =  $(data).attr("value");
                 }
+                return inputData;
+            }
+            compileForms();
+
+            function submitForm(){
+                var form = compileForms();
+                console.log("Form submited");
             }
 
-            compileForms();
+            $("#submit").click(submitForm);
 
         </script>
 
