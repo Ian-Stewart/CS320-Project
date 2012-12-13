@@ -510,57 +510,17 @@ DAL.connectToDatabase(); //connect to the database
 
 //async.series([testIsUserValid, testRetrieveApplication, testRetrieveFormA, testRetrieveApplicationsForPI, testRetrieveApplicationsForCCI, testRetrieveApplicationsForIRB, testRetrieveArchivedApplicationsForUser, testSaveFormA]);
 
-setInterval(callTests,500);
 
 var current_test = 0;
 
-function callTests()//Literally the worst syncrhonous thing ever
-{
-	if(current_test === 0)
-	{
-		testIsUserValid();
-		current_test = 1;
-	}
-	if(current_test === 1)
-	{
-		testRetrieveApplication();
-		current_test = 2;
-	}
-	if(current_test === 2)
-	{
-		testRetrieveFormA();
-		current_test = 3;
-	}
-	if(current_test === 3)
-	{
-		testRetrieveApplicationsForPI();
-		current_test = 4;
-	}
-	if(current_test === 4)
-	{
-		testRetrieveApplicationsForCCI();
-		current_test = 5;
-	}
-	if(current_test === 5)
-	{
-		testRetrieveApplicationsForIRB();
-		current_test = 6;
-	}
-	if(current_test === 6)
-	{
-		testRetrieveArchivedApplicationsForUser();
-		current_test = 7;
-	}
-	if(current_test === 7)
-	{
-		testSaveFormA();
-		current_test = 8
-	}
-	if(current_test === 8)
-	{
-		process.exit(0);
-	}
-}
+testIsUserValid();
+testRetrieveApplication();
+testRetrieveFormA();
+testRetrieveApplicationsForPI();
+testRetrieveApplicationsForCCI();
+testRetrieveApplicationsForIRB();
+testRetrieveArchivedApplicationsForUser();
+testSaveFormA();
 
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
