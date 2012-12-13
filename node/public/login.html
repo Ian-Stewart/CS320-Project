@@ -47,7 +47,7 @@
 
             <div class="grid_6 prefix_3 suffix_3 vspacing">
                 <h3> Password: </h3>
-                <input class="fw" type="password" name="password"> </input>
+                <input class="fw" type="password" name="password" id="myPassword"> </input>
             </div>
 
 
@@ -78,26 +78,29 @@
     function userVerify()
     {
         var txtUsername = document.getElementById("myUsername").value;
+        var txtPass = document.getElementById("myPassword").value;
         var allowedUsers = new Array("pi@beth.org", "irb@beth.org", "multiple@beth.org");
 
         // If username is in the array
-        if ($.inArray(txtUsername ,allowedUsers) >= 0)
+        
+        // 0, myemail@email.com, testpw, Principal Investigator
+        // 1, hisemail@email.com, testpw, CCI
+        // 2, jsmith@email.com, testpw, IRB
+        // 134214, rstiltskin@email.com, testpw, admin
+        
+        // THIS ONE IS IN THE DEMO!
+        // 4, klenovo@email.com, testpw, Principal Investigator
+        
+        if (txtUsername == "klenovo@email.com" && txtPass == "testpw")
         {
-            if (txtUsername == "pi@beth.org")
-            {
-                localStorage.roles = "pi";
-            }
-            else if (txtUsername == "irb@beth.org")
-            {
-                localStorage.roles = "irb";
-            }
-            else if (txtUsername == "multiple@beth.org")
-            {
-                localStorage.roles = "pi,irb"
-            }
+            localStorage.roles = "pi";
+            localStorage.uid = 4;
+            
             localStorage.username = txtUsername;
             window.location = "dashboard.html";
+        
         }
+        
         else if(!validateEmail(txtUsername)){
             alert("Please enter a valid username");
         }
@@ -105,7 +108,7 @@
             alert("Please enter a username");
         }
         else {
-            alert("Please enter a valid username");
+            alert("Please enter a valid username and password");
         }
     }
 
