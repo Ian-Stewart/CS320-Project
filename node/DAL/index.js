@@ -6,7 +6,7 @@ var connInfo =
     port: 14675,
     user: 'user',
     password: 'cs320',
-    database: 'mtt_test'
+    database: 'mtt'
 };
     
 var conn;
@@ -165,7 +165,7 @@ exports.editApplication = function(application, callback)
 
 exports.saveForm = function(form, callback)
 {
-    conn.query("UPDATE Forms SET ? WHERE aid=?", [form, form.aid], function(err, result)
+    conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
     {
         if(err)
         {
