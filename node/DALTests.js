@@ -192,6 +192,10 @@ function testEditFormA(){
 	return true;
 }
 
+function testGetForm(){
+	console.log("OH GOD YOU DIDN'T WRITE THE TEST AND IT'S DEMO DAY YOU IDIOT");
+}
+
 //Vars for testGetFormA:
 var database_form = {//This form should be in the database
 formID:1,
