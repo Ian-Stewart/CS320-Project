@@ -24,283 +24,59 @@ function loadDash()
     // temporary testing...
     //localStorage.roles = "irb,irb";
     var roles = localStorage.roles.split(",");
-    var dashContent = "";
-    for(var i in roles) {
-        if (dashboards[roles[i]]) {
-            dashContent += dashboards[roles[i]];
-            if (i < roles.length - 1) {
-                dashContent += '<br><br><div class="grid_12 vspacing"><hr></div>';
-            }
-        }
+    
+    var templateHTML = $("#appTemplate").html();
+    
+   // getData("/getAllUsers");
+   // getData("/getAppApps");
+   // getData("/createApplication", localStorage.username, "Test", onSuccess);
+    getData("/getPIApplications", localStorage.username, undefined, onSuccess);
+    
+}
+    var onSuccess = function(data){
+        onError();
     }
-    $("#dashContent").html(dashContent);
+
+    var onError = function(){
+       var applications = [{"aid":3,"rid":0,"proposalTitle":"lockedApp2","uid":0,"lastEditBy":"0","editState":"locked","submissionState":"defferedByIRB","approvalState":"null","username":"jjabrams"},{"aid":123452,"rid":0,"proposalTitle":"openApp2","uid":0,"lastEditBy":"0","editState":"open","submissionState":"null","approvalState":"null","username":"jjabrams"},{"aid":1,"rid":0,"proposalTitle":"lockedApp","uid":1,"lastEditBy":"1","editState":"locked","submissionState":"CCI","approvalState":"null","username":"boraily"},{"aid":123458,"rid":0,"proposalTitle":"Test","uid":null,"lastEditBy":null,"editState":null,"submissionState":null,"approvalState":null,"username":null},{"aid":2,"rid":0,"proposalTitle":"frozenApp","uid":2,"lastEditBy":"2","editState":"frozen","submissionState":"IRB","approvalState":"null","username":"jstewart"},{"aid":123451,"rid":0,"proposalTitle":"openApp","uid":4,"lastEditBy":"4","editState":"open","submissionState":"defferedByCCI","approvalState":"null","username":"scolbert"},{"aid":0,"rid":0,"proposalTitle":"archivedApp","uid":134214,"lastEditBy":"134214","editState":"archived","submissionState":"null","approvalState":"approved","username":"glubas"}];
+       
+       var templateHTML = $("#appTemplate").html();
+       for(var app in applications){
+           var app = applications[app];
+           var appHTML = templateHTML.replace("%APPNAME%", app["proposalTitle"]);
+           appHTML = appHTML.replace("%APPID%", app["aid"]);
+           $("#dashContent").append(appHTML);
+           }
+
+           localStorage.applications = JSON.stringify(applications);
+    }
+
+    function setID(appid){
+        localStorage.appid = appid;
+    }
+
+
+function getData(endpoint, username, data, success){
+
+    var urlString = endpoint; 
+    if(username != undefined){
+        urlString += "/" + username;
+    }
+    if(data != undefined){
+        urlString += "/" + data;
+    }
+    $.ajax({
+    type: 'get',
+    url: urlString,
+    contenttype: "application/json",
+    dataType: "json",
+    success: function(data) {
+        console.log(endpoint + " : " + JSON.stringify(data));
+        if(success != undefined){
+            success(data); 
+        }
+    }, error: onError
+    });
 }
 
-var dashboards = {
-"irb":
-    '<div class="grid_12">\
-                <center><h2>IRB Dashboard</h2></center>\
-            </div>\
-<div class="grid_12">\
-                <h2>Applications Requiring Review</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Sample Application</h3>\
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Another Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggreen">\
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Other Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2><a href="#">Approved/Disapproved Application Archives</a></h2>\
-            </div>',
-"pi":
-    '<div class="grid_12">\
-                <center><h2>Primary Investigator Dashboard</h2></center>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Pending Applications</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Sample Application</h3>\
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Different Sample Application</h3> \
-                </div>\
-\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Completed Applications</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Another Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggreen">\
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="#" onclick="btnDelete();">View / Edit </a></h4>\
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Applications Under Review</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Other Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2><a href="#">Approved/Disapproved Application Archives</a></h2>\
-            </div>',
-"cci":
-    '<div class="grid_12">\
-                <center><h2>CCI Dashboard</h2></center>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Applications Requiring Review</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Sample Application</h3>\
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Different Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggreen">\
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Deferred Applications</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Another Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2>Applications Under IRB Review</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Other Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2><a href="#">Approved/Disapproved Application Archives</a></h2>\
-            </div>',
-"chair":
-    '<div class="grid_12">\
-                <center><h2>Chair Dashboard</h2></center>\
-            </div>\
-            <div class="grid_12">\
-                <h2>Applications Requiring Delegation</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Sample Application</h3>\
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Another Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggreen">\
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Other Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2><a href="#">Approved/Disapproved Application Archives</a></h2>\
-            </div>',
-"department":
-    '<div class="grid_12">\
-                <center><h2>Department Dashboard</h2></center>\
-            </div>\
-            <div class="grid_12">\
-                <h2>Applications Requiring Delegation</h2>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Sample Application</h3>\
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Another Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggreen">\
-                    <h4 class="textCenter fw pxshadow"> Complete </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <div class="grid_4 border rounded"> \
-                    <h3>Some Other Sample Application</h3> \
-                </div>\
-                <div class="grid_2 border rounded bggray">\
-                    <h4 class="textCenter fw pxshadow lightText"> Pending </h4> \
-                </div>\
-\
-                <div class="grid_3 border rounded bglightGray">\
-                    <h4 class="textCenter fw pxShadow"><a href="application.html">View / Edit</a></h4> \
-                </div>\
-            </div>\
-            <div class="grid_12 vspacing">\
-                <h2><a href="#">Approved/Disapproved Application Archives</a></h2>\
-            </div>'};
+onError();
