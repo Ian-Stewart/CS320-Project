@@ -2,11 +2,17 @@ var mysql = require('mysql');
 
 var connInfo = 
 {
+    //vicky
     host: 'instance33534.db.xeround.com',
     port: 14675,
+    
+    //warren
+    //host: 'instance34196.db.xeround.com',
+    //port: 16062,
+
     user: 'user',
     password: 'cs320',
-    database: 'mtt_test'
+    database: 'mtt'
 };
     
 var conn;
@@ -129,6 +135,28 @@ exports.deleteUser = function(username, callback)
 // APPLICATION RELATED FUNCTIONS
 //
 
+<<<<<<< HEAD
+=======
+//gets all of the applications whose PI is the specified user. 
+//Takes usersEntry object 
+//Value is array of applicationsEntry objects.
+exports.retrieveAllApplicationsForPI = function(user, callback)
+{
+    conn.query("SELECT * FROM Applications WHERE uid=?", user.uid, function(err, result)
+    {
+        if(err)
+        {
+            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+        }
+        else
+        {
+            callback({status: true, value: result, ErrMsg: undefined});
+        }
+    });
+}
+
+//save a changed version of an application. Takes an application object. Value is undefined.
+>>>>>>> 96b6f8d316e4cc3192858a5939548f6f7742e212
 exports.editApplication = function(application, callback)
 {
     conn.query("UPDATE Applications SET ? WHERE aid=?", [application, application.aid], function(err, result)
@@ -144,10 +172,10 @@ exports.editApplication = function(application, callback)
     });
 }
 
-
+//save a changed version of a form. Takes a form object. Value is undefined.
 exports.saveForm = function(form, callback)
 {
-    conn.query("UPDATE Forms SET ? WHERE aid=?", [form, form.aid], function(err, result)
+    conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
     {
         if(err)
         {
