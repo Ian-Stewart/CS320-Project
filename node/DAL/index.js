@@ -154,12 +154,29 @@ exports.getApplication = function(aid,callback)
     {
         if(err)
         {
-            callback({status:false,value: undefined,ErrMsg:"Database Errpr"});
+            callback({status:false,value: undefined,ErrMsg:"Database Error"});
         }
         else
         {
             callback({status:true, value:result,ErrMsg:undefined});
         }
 
+    });
+}
+
+//Gets an application's form A
+//Takes an application Id
+exports.getFormA = function(aid,callback)
+{
+    conn.query("SELECT * FROM FormA WHERE aid=?",aid,function(err,result)
+    {
+        if(err)
+        {
+            callback({status:false,value: undefined,ErrMsg:"Database Error"});
+        }
+        else
+        {
+            callback({status:true,value:result,ErrMsg:undefined});
+        }
     });
 }

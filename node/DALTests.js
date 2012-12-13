@@ -192,6 +192,16 @@ function testEditFormA(){
 	return true;
 }
 
+function testGetApplication()
+{
+	console.log("There is no test for get application yet...");
+}
+
+function testGetFormA()
+{
+	console.log("You still gotta do dat there test function for dat get form A brah");
+}
+
 //Vars for testGetFormA:
 var database_form = {//This form should be in the database
 formID:1,

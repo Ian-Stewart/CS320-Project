@@ -23,13 +23,11 @@ Foreign KEY (uid) references Users(uid),
 primary key(u_name)
 );
 
-
 CREATE TABLE Permissions(
     permid INT NOT NULL AUTO_INCREMENT,
     descr varchar(25) NOT NULL,
     primary key(permid)
 );
-
 
 CREATE TABLE On_Permissions(
 
@@ -55,7 +53,6 @@ lastEditBy VARCHAR(12),
 PRIMARY KEY(aid,rid),
 FOREIGN KEY (uid) REFERENCES Users(uid)
 );
-
 
 CREATE TABLE FormA (
 aid INT,
