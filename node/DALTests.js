@@ -30,7 +30,7 @@ var ivuser_ivpass={value:false,status:true,ErrMsg:undefined};
 
 
 //Tests isUserValid function
-function testIsUserValid(){
+function testIsUserValid(callback){
     
     async.waterfall([
     function(cb)
@@ -91,6 +91,7 @@ function testIsUserValid(){
             }
         });//Test an invalid user with an invalid password
     }]);
+    callback(null);
 }
 
 //Vars for testEditFormA:
@@ -177,7 +178,7 @@ var generic_app = {
 
 var app_Returned = {value:generic_app,status:true,ErrMsg:undefined};
 
-function testRetrieveApplication()
+function testRetrieveApplication(callback)
 {
 	console.log("Starting test for Retrieve Application");
 	var testA = DAL.retrieveApplication("scolbert",123451,function(results)
@@ -202,6 +203,7 @@ function testRetrieveApplication()
 			console.log("Invalid application retrieval test passed. Expected null, got null");
 		}
 	});
+	callback(null);
 }
 
 var generic_forma = {
@@ -215,7 +217,7 @@ var generic_forma = {
  var formA_invalid = {status: false, value: undefined, ErrMsg: "Database Error"};
 
 
-function testRetrieveFormA()
+function testRetrieveFormA(callback)
 {
 	console.log("Starting test for Retrieve Form A");
 	var testA = DAL.retrieveFormA("scolbert",123451,function(results)
@@ -241,6 +243,7 @@ function testRetrieveFormA()
 		}
 		console.log("Expected " + JSON.stringify(formA_invalid) + ", got " + JSON.stringify(results));
 	});
+	callback(null);
 }
 
 var listOfPIApplications = {//List of jjabram's open applications
@@ -271,7 +274,7 @@ var listOfPIApplications = {//List of jjabram's open applications
 var listOFPIA_valid = {status: true,value:listOfPIApplications,ErrMsg:undefined};
 var listOFPIA_invalid = {status:true,value:[],ErrMsg:undefined};
 
-function testRetrieveApplicationsForPI()
+function testRetrieveApplicationsForPI(callback)
 {
 	console.log("Starting test for get list of PI applications");
 	var testA = DAL.retrieveApplicationsForPI("jjabrams",function(results)
@@ -298,6 +301,7 @@ function testRetrieveApplicationsForPI()
 		}
 	console.log("Expected " + JSON.stringify(listOFPIA_invalid) + ", got " + JSON.stringify(results));
 	});
+	callback(null);
 }
 
 var listofCCA = {
@@ -317,7 +321,7 @@ var listofCCA = {
 var listOFCCI_valid = {status:true,value:listofCCA,ErrMsg:undefined};
 //var listOFCCI_invalid = {status:true,value:{},ErrMsg:undefined};
 
-function testRetrieveApplicationsForCCI()
+function testRetrieveApplicationsForCCI(callback)
 {
 	var testA = DAL.retrieveApplicationsForPI("jjabrams",function(results)
 	{
@@ -344,6 +348,7 @@ function testRetrieveApplicationsForCCI()
 //		}
 //	console.log("Expected " + listOFCCI_invalid + ", got " + results);
 //	});
+callback(null);
 }
 
 var listofIRB = {
@@ -363,7 +368,7 @@ var listofIRB = {
 var listOFIRB_valid = {status:true,value:listofIRB,ErrMsg:undefined};
 //var listOFIRB_invalid = {status:true,value:{},ErrMsg:undefined};
 
-function testRetrieveApplicationsForIRB()
+function testRetrieveApplicationsForIRB(callback)
 {
 	console.log("Starting test for get list of IRB applications");
 	var testA = DAL.retreiveApplicationsForIRB("jstewart",function(results)
@@ -391,6 +396,7 @@ function testRetrieveApplicationsForIRB()
 	//	}
 	//console.log("Expected " + listOFIRB_invalid + ", got " + results);
 	//});
+	callback(null);
 }
 
 var listofArchived = {
@@ -410,7 +416,7 @@ var listofArchived = {
 var listOFArchived_valid = {status:true,value:listofArchived,ErrMsg:undefined};
 var listOFArchived_invalid = {status:true,value:[],ErrMsg:undefined};
 
-function testRetrieveArchivedApplicationsForUser()
+function testRetrieveArchivedApplicationsForUser(callback)
 {
 	console.log("Starting test for get list of archived applications");
 	var testA = DAL.retrieveArchivedApplicationsForUser("glubas",function(results)
@@ -437,9 +443,10 @@ function testRetrieveArchivedApplicationsForUser()
 		}
 	console.log("Expected " + JSON.stringify(listOFArchived_invalid) + ", got " + JSON.stringify(results));
 	});
+	callback(null);
 }
 
-function testSaveFormA()
+function testSaveFormA(callback)
 {
     console.log("Start Test for SaveFormA");
     var form = {//This form should be in the database
@@ -459,6 +466,7 @@ function testSaveFormA()
     DAL.saveForm(name, form, printIt);
     
     console.log("End Test for SaveFormA");
+    callback(null);
 }
 
 //Vars for testGetFormA:
@@ -487,7 +495,7 @@ A14:undefined
 var invalid_form_return = {status:true,value:false,ErrMsg:undefined};//Expected return object when a form ID is not in the database
 var valid_form_return = {status:true,value:database_form,ErrMsg:undefined};
 //Tests the getFormA function
-function testGetFormA(){
+function testGetFormA(callback){
 	console.log("Starting test for getFormA");
 	var testA = DAL.getFormA(database_form[formID]);//Test retrieval of form known to exist in database
 	if(testA !== database_form){
@@ -501,6 +509,7 @@ function testGetFormA(){
 	} 
 	console.log("Test passed!");
 	return true;
+	callback(null);
 }
 
 //Code to call tests
@@ -508,15 +517,7 @@ DAL.connectToDatabase(); //connect to the database
 
 //DAL.testa(123451);//I don't really know what this is supposed to be...
 
-testIsUserValid();
-//testEditFormA();
-testRetrieveApplication();
-testRetrieveFormA();
-testRetrieveApplicationsForPI();
-testRetrieveApplicationsForCCI();
-testRetrieveApplicationsForIRB();
-testRetrieveArchivedApplicationsForUser();
-testSaveFormA();
+async.series([testIsUserValid, testRetrieveApplication, testRetrieveFormA, testRetrieveApplicationsForPI, testRetrieveApplicationsForCCI, testRetrieveApplicationsForIRB, testRetrieveArchivedApplicationsForUser, testSaveFormA]);
 
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
