@@ -179,17 +179,16 @@ var app_Returned = {value:generic_app,status:true,ErrMsg:undefined};
 
 function testRetrieveApplication()
 {
-exports.retrieveApplication = function(username,aid,callback)
 	console.log("Starting test for Retrieve Application");
 	var testA = DAL.retrieveApplication("scolbert",123451,function(results)
 	{
-		if(JSON.encode(result) === JSON.encode(app_Returned)
+		if(JSON.stringify(results) === JSON.stringify(app_Returned))
 		{
-			console.log("Valid application test passed. Expected " + app_Returned + ", got " + results);
+			console.log("Valid application test passed. Expected " + JSON.stringify(app_Returned) + ", got " + JSON.stringify(results));
 		}
 		else
 		{
-			console.log("Valid application test failed. Expected " + app_Returned + ", got " + results);
+			console.log("Valid application test failed. Expected " + JSON.stringify(app_Returned) + ", got " + JSON.stringify(results));
 		}
 	});//Does 101 need to be wrapped in quotation marks?
 	var testB = DAL.retrieveApplication("USER","404",function(results)
@@ -221,13 +220,13 @@ function testRetrieveFormA()
 	console.log("Starting test for Retrieve Form A");
 	var testA = DAL.retrieveFormA("scolbert",123451,function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(formA_returned))
+		if(JSON.stringify(results) === JSON.stringify(formA_returned))
 		{
-			console.log("Test for retrieve valid form A passed. Expected " + formA_returned + ", got " + results);
+			console.log("Test for retrieve valid form A passed. Expected " + JSON.stringify(formA_returned) + ", got " + JSON.stringify(results));
 		}
 		else
 		{
-			console.log("Test for retrieve valid form A failed. Expected " + formA_returned + ", got " + results);
+			console.log("Test for retrieve valid form A failed. Expected " + JSON.stringify(formA_returned) + ", got " + JSON.stringify(results));
 		}
 	});
 	var testB = DAL.retrieveFormA("rms",209392,function(results)
@@ -240,7 +239,7 @@ function testRetrieveFormA()
 		{
 			console.log("Invalid form a request test passed.");
 		}
-		console.log("Expected " + formA_invalid + ", got " + results);
+		console.log("Expected " + JSON.stringify(formA_invalid) + ", got " + JSON.stringify(results));
 	});
 }
 
@@ -270,14 +269,14 @@ var listOfPIApplications = {//List of jjabram's open applications
 };
 
 var listOFPIA_valid = {status: true,value:listOfPIApplications,ErrMsg:undefined};
-var listOFPIA_invalid = {status:true,value:{},ErrMsg:undefined};
+var listOFPIA_invalid = {status:true,value:[],ErrMsg:undefined};
 
 function testRetrieveApplicationsForPI()
 {
 	console.log("Starting test for get list of PI applications");
-	var testA = DAL.testRetrieveApplicationsForPI("jjabrams",function(results)
+	var testA = DAL.retrieveApplicationsForPI("jjabrams",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFPIA_valid))
+		if(JSON.stringify(results) === JSON.stringify(listOFPIA_valid))
 		{
 			console.log("Test get list valid PI applications successful.");
 		}
@@ -285,11 +284,11 @@ function testRetrieveApplicationsForPI()
 		{
 			console.log("Test get list valid PI applications unsuccessful.");
 		}
-	console.log("Expected " + listOFPIA_valid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFPIA_valid) + ", got " + JSON.stringify(results));
 	});
-	var testB = DAL.testRetrieveApplicationsForPI("rms",function(results)
+	var testB = DAL.retrieveApplicationsForPI("rms",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFPIA_invalid))
+		if(JSON.stringify(results) === JSON.stringify(listOFPIA_invalid))
 		{
 			console.log("Test get list valid PI applications successful.");
 		}
@@ -297,7 +296,7 @@ function testRetrieveApplicationsForPI()
 		{
 			console.log("Test get list valid PI applications unsuccessful.");
 		}
-	console.log("Expected " + listOFPIA_invalid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFPIA_invalid) + ", got " + JSON.stringify(results));
 	});
 }
 
@@ -322,7 +321,7 @@ function testRetrieveApplicationsForCCI()
 {
 	var testA = DAL.retrieveApplicationsForPI("jjabrams",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFPCCI_valid))
+		if(JSON.stringify(results) === JSON.stringify(listOFCCI_valid))
 		{
 			console.log("Test get valid CCI applications successful.");
 		}
@@ -330,12 +329,12 @@ function testRetrieveApplicationsForCCI()
 		{
 			console.log("Test get valid CCI applications unsuccessful.");
 		}
-	console.log("Expected " + listOFCCI_valid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFCCI_valid) + ", got " + JSON.stringify(results));
 	});
 //There is no invalid input for this function yet
 //	var testB = DAL.retrieveApplicationsForPI("rms",function(results)
 //	{
-//		if(JSON.encode(results) === JSON.encode(listOFCCI_invalid))
+//		if(JSON.stringify(results) === JSON.stringify(listOFCCI_invalid))
 //		{
 //			console.log("Test get valid CCI applications successful.");
 //		}
@@ -367,9 +366,9 @@ var listOFIRB_valid = {status:true,value:listofIRB,ErrMsg:undefined};
 function testRetrieveApplicationsForIRB()
 {
 	console.log("Starting test for get list of IRB applications");
-	var testA = DAL.retrieveApplicationsForIRB("jstewart",function(results)
+	var testA = DAL.retreiveApplicationsForIRB("jstewart",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFIRB_valid))
+		if(JSON.stringify(results) === JSON.stringify(listOFIRB_valid))
 		{
 			console.log("Test get valid IRB applications successful.");
 		}
@@ -377,12 +376,12 @@ function testRetrieveApplicationsForIRB()
 		{
 			console.log("Test get valid IRB applications unsuccessful.");
 		}
-	console.log("Expected " + listOFIRB_valid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFIRB_valid) + ", got " + JSON.stringify(results));
 	});
 	//There is no invalid input for this function yet
 	//var testB = DAL.retrieveApplicationsForIRB("rms",function(results)
 	//{
-	//	if(JSON.encode(results) === JSON.encode(listOFIRB_invalid))
+	//	if(JSON.stringify(results) === JSON.stringify(listOFIRB_invalid))
 	//	{
 	//		console.log("Test get invalid IRB applications successful.");
 	//	}
@@ -409,14 +408,14 @@ var listofArchived = {
 };
 
 var listOFArchived_valid = {status:true,value:listofArchived,ErrMsg:undefined};
-var listOFArchived_invalid = {status:true,value:{},ErrMsg:undefined};
+var listOFArchived_invalid = {status:true,value:[],ErrMsg:undefined};
 
 function testRetrieveArchivedApplicationsForUser()
 {
 	console.log("Starting test for get list of archived applications");
 	var testA = DAL.retrieveArchivedApplicationsForUser("glubas",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFArchived_valid))
+		if(JSON.stringify(results) === JSON.stringify(listOFArchived_valid))
 		{
 			console.log("Test get valid IRB applications successful.");
 		}
@@ -424,11 +423,11 @@ function testRetrieveArchivedApplicationsForUser()
 		{
 			console.log("Test get valid IRB applications unsuccessful.");
 		}
-	console.log("Expected " + listOFIRB_valid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFIRB_valid) + ", got " + JSON.stringify(results));
 	});
 	var testB = DAL.retrieveArchivedApplicationsForUser("rms",function(results)
 	{
-		if(JSON.encode(results) === JSON.encode(listOFArchived_invalid))
+		if(JSON.stringify(results) === JSON.stringify(listOFArchived_invalid))
 		{
 			console.log("Test get valid IRB applications successful.");
 		}
@@ -436,7 +435,7 @@ function testRetrieveArchivedApplicationsForUser()
 		{
 			console.log("Test get valid IRB applications unsuccessful.");
 		}
-	console.log("Expected " + listOFArchived_invalid + ", got " + results);
+	console.log("Expected " + JSON.stringify(listOFArchived_invalid) + ", got " + JSON.stringify(results));
 	});
 }
 
@@ -510,7 +509,7 @@ DAL.connectToDatabase(); //connect to the database
 //DAL.testa(123451);//I don't really know what this is supposed to be...
 
 testIsUserValid();
-testEditFormA();
+//testEditFormA();
 testRetrieveApplication();
 testRetrieveFormA();
 testRetrieveApplicationsForPI();
