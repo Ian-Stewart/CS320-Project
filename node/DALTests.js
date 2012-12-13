@@ -519,6 +519,9 @@ DAL.connectToDatabase(); //connect to the database
 
 async.series([testIsUserValid, testRetrieveApplication, testRetrieveFormA, testRetrieveApplicationsForPI, testRetrieveApplicationsForCCI, testRetrieveApplicationsForIRB, testRetrieveArchivedApplicationsForUser, testSaveFormA]);
 
+
+
+
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
 //console.log("Done with all tests!");.

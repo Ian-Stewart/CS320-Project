@@ -6,7 +6,7 @@
  , routes = require('./routes')
  , http = require('http')
  , path = require('path')
- , model = require('./public/js/mockrequesthandler.js');
+ , model = require('./DAL/index.js');
 
 var app = express();
 
@@ -26,266 +26,52 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-
-/*
-Description:  Public Function called by the content module, returns the revision history for a particular form based on its FormID.
-calls getRevisions(form)
-*/
-
-app.get('/getFormHistory', function(req, res) {
-  var formHistory = model.getRevisions(req.query.token, req.query.formID)
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(formHistory) );
-  res.end('\n');
-});
+app.get('/', routes.index); //I don't know what this does, but I did not put it here
 
 
-/*
-Description:  Public Function called by the content module, returns the comments for a particular form based on its FormID.
-calls getForm(form)
-*/
-
-app.get('/getFormComments', function(req, res){
-  var formComments = model.getForm(req.query.token, req.query.formID);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(formComments) );
-  res.end('\n');
-});
-
-
-/*
-Description:  Public Function called by the content module, returns the full set of forms for a particular Application based on its ApplicationID.
-calls retrieveAllFormsForApplication()
-*/
-
-app.get('/getApplicationForms', function(req, res){
-  var forms = model.getForm(req.query.token, req.query.applicationID);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(forms) );
-  res.end('\n');
-});
-
-/*
-Description:  Public Function called by the content module, sends pertinent information to function handler for creating a new application.
-calls createNewApplication() and
-*/
-
-app.get('/createApplication', function(req, res){
-  var result = model.createNewApplication(req.query.token);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(result) );
-  res.end('\n');
-});
-
-
-/*
-Description:  Public Function called by the content module, passes updated form with associated ID and data to the function handler which updates the corresponding form associated with the given applicationID.
-calls saveForm(form,formObjectJSON)
-*/
-
-app.get('/saveForm', function(req, res){
-  var result = model.saveForm(req.query.token, req.query.form);
-
-  console.log(result);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(result) );
-  res.end('\n');
-});
-
-/*
-Description:  Public function called by the content module, passes username, applicationID and formID  to request handler which associates the username as a CI on the given application  with read/write privileges to the forms in formID
-calls delegateApplication(user_a, user_b, applicationID)
-*/
-
-app.get('/delegateApplication', function(req, res){
-  var result = model.delegateApplication(req.query.token, req.query.username, req.query.applicationID, req.query.formID);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
-    res.write( JSON.stringify(result) );
-  }
-  else{
-    // res.write( JSON.stringify(sendNotification(req.query.username, 'request_ci') ) );
-  }
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID and list of CIs to be added to the request handler which associates the users in the list as CIs on the given application.
-calls editUser(username, userObjectJSON) and createNewUser(username, userObjectJSON)
-*/
-
-app.get('/AddCIs', function(req, res){
-  var result = model.addCIs(req.query.Token, req.query.ApplicationID, req.query.CIList);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  if (result.status == 1){
-    res.write( JSON.stringify(result) );
-  }
-  else{
-    // res.write( JSON.stringify(sendNotification(req.query.CIList, 'Added as CI') ) );
-  }
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID and list of forms to be removed to the request handler which removes the forms in the list from the given application.
-calls removeForms()
-*/
-
-app.get('/RemoveForms', function(req, res){
-  var result = model.removeForms(req.query.token, req.query.applicationID, req.query.formIDs);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  res.write( JSON.stringify(result) );
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID to the request handler which updates the status of the application to accepted.
-calls changeApplicationStatus(applicationID, status)
-*/
-
-app.get('/AcceptApplication', function(req, res){
-  var result = model.changeApplicationStatus(req.query.token, req.query.applicationID, "Accepted");
-
-  res.writeHead(200, {'content-type': 'text/json' });
-
-  //if (result.status = 1){
-    res.write( JSON.stringify(result) );
-  /*}
-  else{
-    var PI = getPIOfApp(req.query.token, req.query.applicationID);
-    if (PI.status == 1){
-      res.write( JSON.stringify(PI) );
-    }
-    else{
-      res.write( JSON.stringify(sendNotification(PI.value, "Application Accepted") ) );
-    }
-  }
-  */
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID to the request handler which updates the status of the application to rejected.
-calls changeApplicationStatus(applicationID, status)
-*/
-
-app.get('/RejectApplication', function(req, res){
-  var result = model.changeApplicationStatus(req.query.token, req.query.applicationID, "Rejected");
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  //if (result.code == 1){
-    res.write( JSON.stringify(result) );
-
-  /*}
-  else{
-    var PI = model.getPIOfApp(req.query.token, req.query.applicationID);
-    if (PI.code == 1){
-      res.write( JSON.stringify(PI) );
-    }
-    else{
-      // res.write( JSON.stringify(model.sendNotification(PI.value, "Application Rejected")) );
-    }
-  }
-  */
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID and reviewers to the request handler which associates the users in the list as CCI/IRB reviewers for the application.
-calls editUser(username, useObjectJSON)
-*/
-
-app.get('/DelegateReview', function(req, res){
-  var result = model.addAsReviewer(req.query.token, req.query.applicationID, req.query.reviewers);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
-    res.write( JSON.stringify(result) );
-  }
-  else{
-    // res.write( JSON.stringify(sendNotification(reviewers, "Delegated for Review") ) ); 
-  }
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes user data to the request handler which adds a user account from the given data.
-calls createNewUser(username, userObjectJSON)
-*/
-app.get('/CreateAccount', function(req, res){
-  var result = model.createNewUser(req.query.userData.username, req.query.userData);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
-    res.write( JSON.stringify(result) );
-  }
-  else{
-    // res.write( JSON.stringify(sendNotification(req.query.userData.username, "New Account") ) );            
-  }
-  res.end('\n');
-});
-
-
-
-
-/*
-Description:  Public function called by the content module, passes a formID to the request handler which updates the status of the form.
-calls submitForm(formID, username)
-*/
-
-app.get('/SubmitApplication', function(req, res){
-  var result = model.submitApplication(req.query.token, req.query.applicationID)
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  //if (result.code == 1){
-    res.write( JSON.stringify(result) );
-  /*}
-  else{
-    var Chair = model.getChair(req.query.token);
-    if (Chair.code == 1){
-      res.write ( JSON.stringify(Chair) );
-    }
-    else{
-      // res.write( JSON.stringify (sendNotification(Chair.value, "Application submitted for review") ) );
-    }
-  }
-  */
-  res.end('\n');
-});
-
-
-/*
-Description:  Public function called by the content module, passes applicationID and list of users to the request handler which associates the users with the given application as requested CIs. It also sends a request to the notification module to send notifications to the potential CIs.
-calls editUser(user, userObjectJSON)*/
-
-app.get('/RequestCollaboration', function(req, res){
-  result = model.addPotentialCI(req.query.token, req.query.applicationID, req.query.ciList);
-
-  res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
-    res.write( JSON.stringify(result) );
-  }
-  else{
-    res.write( JSON.stringify(sendNotification(req.query.ciList, "Collaboration Requested") ) );
-  }
-  res.end('\n');
-});
-
+//gets all of the applications for a PI. Username is needed.
+app.get('/getPIApplications/:username', function(req, res) {
+    model.retrieveApplicationsForPI(req.params.username, function(result) { res.send(result); } );
+    });
+ 
+//gets all of the applications for a CCI. Username is needed.
+app.get('/getCCIApplications/:username', function(req, res) {
+    model.retrieveApplicationsForCCI(req.params.username, function(result) { res.send(result); } );
+    });
+    
+//gets all of the applications for a IRB. Username is needed.
+app.get('/getIRBApplications/:username', function(req, res) {
+    model.retrieveApplicationsForIRB(req.params.username, function(result) { res.send(result); } );
+    });    
+    
+//gets a specific form a - we are NOT checking username, it can be any string. AID for the formA's application is needed.
+app.get('/getFormA/:username/:aid', function(req, res) {
+    model.retrieveFormA(req.params.username, req.params.aid, function(result) { res.send(result); } );
+    });
+    
+//edits an application. NOT checking username. Application is where you shove your entire JSON object.
+app.get('/editApplication/:username/:application', function(req, res){
+    model.editApplication(req.params.username, req.params.application, function(result) { res.send(result); } );
+    });
+    
+//saves an edit to a form. We ARE checking username on this one. form is where you shove your entire JSON object.
+app.get('/saveForm/:username/:form', function(req, res){
+    model.saveForm(req.params.username, req.params.form, function(result) { res.send(result); } );
+    });
+    
+//gets one application based on its aid. This one does not check username, aid is the applicaton id for the application you want.
+app.get('/retrieveApplication/:username/:aid', function(req, res){
+    model.retrieveApplication(req.params.username, req.params.aid, function(result) { res.send(result); } );
+    });
+    
+//create an application - this creates a blank application. The application will have whatever long title you pass in title. Not checking username.
+//return value is "special" for this one- value is an object which only has one parameter - aid, which you can use when you call retrieveApplication.
+//this creates a blank form A for you too, automagically, same aid.
+app.get('/createApplication/:username/:title', function(req, res){
+    model.saveForm(req.params.username, req.params.title, function(result) { res.send(result); } );
+    });
+    
+    
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

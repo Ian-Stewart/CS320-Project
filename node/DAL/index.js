@@ -242,10 +242,33 @@ exports.saveForm = function(username,form,callback)
     });
 }
                         
-  
-            
-  
-
+exports.createApplication = function(username, title, callback)
+{
+    conn.query("INSERT INTO Applications(proposalTitle) VALUES(?)", title, function(err, result)
+    {
+        if(err)
+        {
+            console.log(err);
+            callback({status:false,value: undefined,ErrMsg:"Database Error"});
+        }
+        else
+        {
+            console.log(result);
+            conn.query("INSERT INTO forma(aid) VALUES(?)", result.insertId, function(err, result2)
+            {
+                if(err)
+                {
+                    console.log(err);
+                    callback({status:false,value: undefined,ErrMsg:"Database Error"});
+                }
+                else
+                {
+                    callback({status:true, value:{aid: result.insertId},ErrMsg:undefined});
+                }
+            });
+        }
+    });
+}
 
 //Gets an application given an application Id
 exports.retrieveApplication = function(username,aid,callback)
