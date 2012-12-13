@@ -207,7 +207,7 @@ exports.retrieveFormA = function(username,aid,callback)
 //Retrieves all applications for a given PI
 exports.retrieveApplicationsForPI = function(username,callback)
 {
-    conn.query("SELECT aid, proposalTitle FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
     {
         if(err)
         {
@@ -223,7 +223,7 @@ exports.retrieveApplicationsForPI = function(username,callback)
 //Retrieves all applications for a given CCI
 exports.retrieveApplicationsForCCI = function(username,callback)//Username is currently not used
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = CCI",function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState = 'CCI'",function(err,result)
         {
             if(err)
             {
@@ -239,7 +239,7 @@ exports.retrieveApplicationsForCCI = function(username,callback)//Username is cu
 //Retrieves all applications for a given IRB
 exports.retreiveApplicationsForIRB = function (username,callback)//Username is currently not used
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = IRB",function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState = 'IRB'",function(err,result)
         {
             if(err)
             {
@@ -255,7 +255,7 @@ exports.retreiveApplicationsForIRB = function (username,callback)//Username is c
 //Retrieves all archived applications created by a given user
 exports.retrieveArchivedApplicationsForUser = function(username,callback)
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE editState = archived AND username = ?",username,function(err,result)
+    conn.query("SELECT * FROM Applications WHERE editState = 'archived' AND username = ?",username,function(err,result)
         {
             if(err)
             {
