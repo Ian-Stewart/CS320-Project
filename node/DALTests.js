@@ -192,14 +192,39 @@ function testEditFormA(){
 	return true;
 }
 
-function testGetApplication()
+function testRetrieveApplication()
 {
-	console.log("There is no test for get application yet...");
+
 }
 
-function testGetFormA()
+function testRetrieveFormA()
 {
-	console.log("You still gotta do dat there test function for dat get form A brah");
+
+}
+
+function testRetrieveApplicationsForPI()
+{
+
+}
+
+function testRetrieveApplicationsForCCI()
+{
+
+}
+
+function testRetrieveApplicationsForIRB()
+{
+
+}
+
+function testRetrieveArchivedApplicationsForUser()
+{
+
+}
+
+function testSaveFormA()
+{
+
 }
 
 //Vars for testGetFormA:
@@ -250,6 +275,15 @@ DAL.connectToDatabase(); //connect to the database
 //DAL.testa(123451);//I don't really know what this is supposed to be...
 
 testIsUserValid();
+testEditFormA();
+testRetrieveApplication();
+testRetrieveFormA();
+testRetrieveApplicationsForPI();
+testRetrieveApplicationsForCCI();
+testRetrieveApplicationsForIRB();
+testRetrieveArchivedApplicationsForUser();
+testSaveFormA();
+
 //console.log("Testing editFormA:" + testEditFormA());
 //console.log("Testing getFormA:" + testGetFormA());
 //console.log("Done with all tests!");.

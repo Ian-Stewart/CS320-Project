@@ -152,9 +152,24 @@ exports.editApplication = function(username,application, callback)
 }
 
 //save a changed version of a form. Takes a form object. Value is undefined.
+
 exports.saveForm = function(username,form, callback)
 {
-    conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
+    var allowEdit = function() //this gets run when if and only if the user is actually allowed to do the edit
+    {
+        conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
+        {
+            if(err)
+            {
+                callback({status: false, value: undefined, ErrMsg: "Database Error"});
+            }
+            else
+            {
+                callback({status: true, value: undefined, ErrMsg: undefined});
+            }
+        });
+    };
+    conn.query("SELECT * FROM Logins INNER JOIN On_Permissions ON Logins.uid=On_Permissions.uid WHERE Logins.username=?", function(err, result)
     {
         if(err)
         {
@@ -162,7 +177,105 @@ exports.saveForm = function(username,form, callback)
         }
         else
         {
-            callback({status: true, value: undefined, ErrMsg: undefined});
+            if(result[0])
+            {
+                if(result[0].permid === 12341) //cci
+                {
+                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
+                    {
+                        if(err)
+                        {
+                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                        }
+                        else
+                        {
+                            if(result[0])
+                            {
+                                if(result[0].submissionState === 'CCI')
+                                {
+                                    allowEdit();
+                                }
+                                else
+                                {
+                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
+                                }
+                            }
+                            else
+                            {
+                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                            }
+                        }
+                    });    
+                }
+                else if(result[0].permid === 23523) //admin
+                {
+                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
+                }
+                else if(result[0].permid === 123912) //pi
+                {
+                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
+                    {
+                        if(err)
+                        {
+                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                        }
+                        else
+                        {
+                            if(result[0])
+                            {
+                                if(result[0].editState === 'open' && result[0].submissionState !== 'IRB' && result[0].submissionState !== 'CCI' && result[0].approvalState !== 'null')
+                                {
+                                    allowEdit();
+                                }
+                                else
+                                {
+                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
+                                }
+                            }
+                            else
+                            {
+                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                            }
+                        }
+                    });
+                }
+                else if(result[0].permid === 324552) //irb
+                {
+                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
+                    {
+                        if(err)
+                        {
+                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                        }
+                        else
+                        {
+                            if(result[0]) 
+                            {
+                                if(result[0].submissionState === 'IRB')
+                                {
+                                    allowEdit();
+                                }
+                                else
+                                {
+                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
+                                }
+                            }
+                            else
+                            {
+                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    callback({status: false, value: undefined, ErrMsg: "Database Error"});
+                }
+            }
+            else
+            {
+                callback({status: false, value: undefined, ErrMsg: "Database Error"});
+            }
         }
     });
 }
@@ -207,7 +320,7 @@ exports.retrieveFormA = function(username,aid,callback)
 //Retrieves all applications for a given PI
 exports.retrieveApplicationsForPI = function(username,callback)
 {
-    conn.query("SELECT aid, proposalTitle FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
     {
         if(err)
         {
@@ -223,7 +336,7 @@ exports.retrieveApplicationsForPI = function(username,callback)
 //Retrieves all applications for a given CCI
 exports.retrieveApplicationsForCCI = function(username,callback)//Username is currently not used
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = CCI",function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState = 'CCI'",function(err,result)
         {
             if(err)
             {
@@ -239,7 +352,7 @@ exports.retrieveApplicationsForCCI = function(username,callback)//Username is cu
 //Retrieves all applications for a given IRB
 exports.retreiveApplicationsForIRB = function (username,callback)//Username is currently not used
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE submissionState = IRB",function(err,result)
+    conn.query("SELECT * FROM Applications WHERE submissionState = 'IRB'",function(err,result)
         {
             if(err)
             {
@@ -255,7 +368,7 @@ exports.retreiveApplicationsForIRB = function (username,callback)//Username is c
 //Retrieves all archived applications created by a given user
 exports.retrieveArchivedApplicationsForUser = function(username,callback)
 {
-    conn.query("SELECT aid,proposalTitle, username FROM Applications WHERE editState = archived AND username = ?",username,function(err,result)
+    conn.query("SELECT * FROM Applications WHERE editState = 'archived' AND username = ?",username,function(err,result)
         {
             if(err)
             {
