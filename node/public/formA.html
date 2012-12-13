@@ -172,27 +172,8 @@
                     </div>
                 </div>
             </div>
-            <div class="grid_3">
-                <h3> Revision History </h3>
-                <div class="border insetShadow">
-                    <h4 class="fw textCenter green nopadding"> Dr. Nick </h4>
-                    <h5 class="fw textCenter nopadding" > 10/12/2012 </h5>
-                </div>
-                <div class="border insetShadow">
-                    <h4 class="fw textCenter orange nopadding"> Dr. Dre </h4>
-                    <h5 class="fw textCenter nopadding" > 10/10/2012 </h5>
-                </div>
-                <div class="border insetShadow">
-                    <h4 class="fw textCenter green nopadding"> Dr. Nick </h4>
-                    <h5 class="fw textCenter nopadding" > 10/8/2012 </h5>
-                </div>
-                <div class="border insetShadow">
-                    <h4 class="fw textCenter red nopadding"> Dr. Princess </h4>
-                    <h5 class="fw textCenter nopadding" > 10/1/2012 </h5>
-                </div>
-                
-            </div>
-                
+               <input class="grid_4" type="button" name="submit" value="Submit"/> 
+
 
         </div>
         <footer>
@@ -206,30 +187,15 @@
 
             function compileForms(){
                 var inputs = $("input");
-                var inputData = new Array();
+                var inputData = {}
                 for(var data in inputs) {
                     data = inputs[data];
-                    inputData.push({"name": $(data).attr("name"), "value" : $(data).attr("value")});
+                    inputData[ $(data).attr("name")] =  $(data).attr("value");
                 }
-                console.log(inputData);
             }
 
             compileForms();
 
-            function test(){
-                 $.ajax({
-                    type: 'get',
-                    url: '/createApplication',
-                    data: {'token': '1',
-                    'formID': '12345'},
-                    dataType: "json",
-                    success: function(data) {
-                    console.log(data);
-                    }
-                    });      
-                 }
-
-                 test();
         </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
