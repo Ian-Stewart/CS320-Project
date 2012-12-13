@@ -147,6 +147,7 @@ exports.retrieveAllApplicationsForPI = function(user, callback)
     });
 }
 
+//save a changed version of an application. Takes an application object. Value is undefined.
 exports.editApplication = function(application, callback)
 {
     conn.query("UPDATE Applications SET ? WHERE aid=?", [application, application.aid], function(err, result)
@@ -162,7 +163,7 @@ exports.editApplication = function(application, callback)
     });
 }
 
-
+//save a changed version of a form. Takes a form object. Value is undefined.
 exports.saveForm = function(form, callback)
 {
     conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
