@@ -148,7 +148,7 @@ exports.retrieveAllApplicationsForPI = function(user, callback)
 }
 
 //Gets an application given an application Id
-exports.getApplication = function(aid,callback)
+exports.retrieveApplication = function(aid,callback)
 {
     conn.query("SELECT * FROM Applications WHERE aid=?",aid,function(err,result)
     {
@@ -166,7 +166,7 @@ exports.getApplication = function(aid,callback)
 
 //Gets an application's form A
 //Takes an application Id
-exports.getFormA = function(aid,callback)
+exports.retrieveFormA = function(aid,callback)
 {
     conn.query("SELECT * FROM FormA WHERE aid=?",aid,function(err,result)
     {
@@ -179,4 +179,30 @@ exports.getFormA = function(aid,callback)
             callback({status:true,value:result,ErrMsg:undefined});
         }
     });
+}
+
+
+//Note: may want to revisit these to verify that the user given is actually a CCI/IRB etc
+//Retrieves all applications for a given PI
+exports.retrieveApplicationForPI = function(username)
+{
+
+}
+
+//Retrieves all applications for a given CCI
+exports.retrieveApplicationsForCCI = function(username)
+{
+
+}
+
+//Retrieves all applications for a given IRB
+exports.retreiveApplicationsForIRB = function (username)
+{
+
+}
+
+//Retrieves all archived applications created by a given user
+exports.retrieveArchivedApplicationsForUser = function(username)
+{
+    //conn.query("SELECT * FROM FormA WHERE u_name"{});
 }
