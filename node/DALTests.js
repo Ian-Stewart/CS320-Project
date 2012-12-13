@@ -442,7 +442,24 @@ function testRetrieveArchivedApplicationsForUser()
 
 function testSaveFormA()
 {
-
+    console.log("Start Test for SaveFormA");
+    var form = {//This form should be in the database
+    aid:123452,
+    rid:1,
+    lastEditBy:0,
+    proposalTitle:"It Changed!",
+    shortTitle:"WOW!"
+    };//End database_form
+    
+    var name = "jjabrams";
+    
+    function printIt(it) { console.log(it.value, it.ErrMsg); };
+    
+    console.log("Above Test for SaveFormA");
+    
+    DAL.saveForm(name, form, printIt);
+    
+    console.log("End Test for SaveFormA");
 }
 
 //Vars for testGetFormA:
@@ -492,14 +509,14 @@ DAL.connectToDatabase(); //connect to the database
 
 //DAL.testa(123451);//I don't really know what this is supposed to be...
 
-testIsUserValid();
-testEditFormA();
-testRetrieveApplication();
-testRetrieveFormA();
-testRetrieveApplicationsForPI();
-testRetrieveApplicationsForCCI();
-testRetrieveApplicationsForIRB();
-testRetrieveArchivedApplicationsForUser();
+//testIsUserValid();
+//testEditFormA();
+//testRetrieveApplication();
+//testRetrieveFormA();
+//testRetrieveApplicationsForPI();
+//testRetrieveApplicationsForCCI();
+//testRetrieveApplicationsForIRB();
+//testRetrieveArchivedApplicationsForUser();
 testSaveFormA();
 
 //console.log("Testing editFormA:" + testEditFormA());

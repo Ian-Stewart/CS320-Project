@@ -6,7 +6,7 @@
  , routes = require('./routes')
  , http = require('http')
  , path = require('path')
- , model = require('./node_modules/test/mockRequestHandler.js');
+ , model = require('./public/js/mockrequesthandler.js');
 
 var app = express();
 
@@ -27,7 +27,6 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
 /*
 Description:  Public Function called by the content module, returns the revision history for a particular form based on its FormID.
@@ -63,7 +62,7 @@ calls retrieveAllFormsForApplication()
 */
 
 app.get('/getApplicationForms', function(req, res){
-  var forms = model.retrieveAllFormsForApplication(req.query.token, req.query.applicationID);
+  var forms = model.getForm(req.query.token, req.query.applicationID);
 
   res.writeHead(200, {'content-type': 'text/json' });
   res.write( JSON.stringify(forms) );
@@ -127,7 +126,7 @@ app.get('/AddCIs', function(req, res){
   var result = model.addCIs(req.query.Token, req.query.ApplicationID, req.query.CIList);
 
   res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
+  if (result.status == 1){
     res.write( JSON.stringify(result) );
   }
   else{
@@ -161,18 +160,19 @@ app.get('/AcceptApplication', function(req, res){
 
   res.writeHead(200, {'content-type': 'text/json' });
 
-  if (result.code = 1){
+  //if (result.status = 1){
     res.write( JSON.stringify(result) );
-  }
+  /*}
   else{
     var PI = getPIOfApp(req.query.token, req.query.applicationID);
-    if (PI.code == 1){
+    if (PI.status == 1){
       res.write( JSON.stringify(PI) );
     }
     else{
       res.write( JSON.stringify(sendNotification(PI.value, "Application Accepted") ) );
     }
   }
+  */
   res.end('\n');
 });
 
@@ -186,10 +186,10 @@ app.get('/RejectApplication', function(req, res){
   var result = model.changeApplicationStatus(req.query.token, req.query.applicationID, "Rejected");
 
   res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
+  //if (result.code == 1){
     res.write( JSON.stringify(result) );
 
-  }
+  /*}
   else{
     var PI = model.getPIOfApp(req.query.token, req.query.applicationID);
     if (PI.code == 1){
@@ -199,6 +199,7 @@ app.get('/RejectApplication', function(req, res){
       // res.write( JSON.stringify(model.sendNotification(PI.value, "Application Rejected")) );
     }
   }
+  */
   res.end('\n');
 });
 
@@ -251,9 +252,9 @@ app.get('/SubmitApplication', function(req, res){
   var result = model.submitApplication(req.query.token, req.query.applicationID)
 
   res.writeHead(200, {'content-type': 'text/json' });
-  if (result.code == 1){
+  //if (result.code == 1){
     res.write( JSON.stringify(result) );
-  }
+  /*}
   else{
     var Chair = model.getChair(req.query.token);
     if (Chair.code == 1){
@@ -263,6 +264,7 @@ app.get('/SubmitApplication', function(req, res){
       // res.write( JSON.stringify (sendNotification(Chair.value, "Application submitted for review") ) );
     }
   }
+  */
   res.end('\n');
 });
 

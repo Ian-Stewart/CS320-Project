@@ -12,7 +12,7 @@ var connInfo =
 
     user: 'user',
     password: 'cs320',
-    database: 'mtt'
+    database: 'mtt_test'
 };
     
 var conn;
@@ -40,7 +40,7 @@ exports.connectToDatabase = function()
 //Checks if the specified user is valid. Takes username and password. Value is boolean.
 exports.isUserValid = function(username, pass, callback)
 { 
-    conn.query("SELECT password FROM Logins WHERE u_name = ?", user, function(err, result) 
+    conn.query("SELECT password FROM Logins WHERE u_name = ?", username, function(err, result) 
     {
         if (err)
         {
@@ -153,132 +153,98 @@ exports.editApplication = function(username,application, callback)
 
 //save a changed version of a form. Takes a form object. Value is undefined.
 
-exports.saveForm = function(username,form, callback)
+exports.saveForm = function(username,form,callback)
 {
+    var done = false;
+    
     var allowEdit = function() //this gets run when if and only if the user is actually allowed to do the edit
     {
         conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
         {
-            if(err)
+            if(err) //there was a database error
             {
                 callback({status: false, value: undefined, ErrMsg: "Database Error"});
             }
-            else
+            else //everything worked, return success
             {
                 callback({status: true, value: undefined, ErrMsg: undefined});
             }
         });
     };
-    conn.query("SELECT * FROM Logins INNER JOIN On_Permissions ON Logins.uid=On_Permissions.uid WHERE Logins.username=?", function(err, result)
+    
+    //check if the user has permissions to edit the form
+    conn.query("SELECT * FROM Logins INNER JOIN On_Permissions ON Logins.uid=On_Permissions.uid WHERE Logins.username=?", username,  function(err, result)
     {
-        if(err)
+        if(err) //there was a database error
         {
             callback({status: false, value: undefined, ErrMsg: "Database Error"});
         }
-        else
+        else //we can keep going
         {
-            if(result[0])
+            //make another database call
+            conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, a_result)
             {
-                if(result[0].permid === 12341) //cci
-                {
-                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
-                    {
-                        if(err)
-                        {
-                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                        }
-                        else
-                        {
-                            if(result[0])
-                            {
-                                if(result[0].submissionState === 'CCI')
-                                {
-                                    allowEdit();
-                                }
-                                else
-                                {
-                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
-                                }
-                            }
-                            else
-                            {
-                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                            }
-                        }
-                    });    
-                }
-                else if(result[0].permid === 23523) //admin
-                {
-                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
-                }
-                else if(result[0].permid === 123912) //pi
-                {
-                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
-                    {
-                        if(err)
-                        {
-                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                        }
-                        else
-                        {
-                            if(result[0])
-                            {
-                                if(result[0].editState === 'open' && result[0].submissionState !== 'IRB' && result[0].submissionState !== 'CCI' && result[0].approvalState !== 'null')
-                                {
-                                    allowEdit();
-                                }
-                                else
-                                {
-                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
-                                }
-                            }
-                            else
-                            {
-                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                            }
-                        }
-                    });
-                }
-                else if(result[0].permid === 324552) //irb
-                {
-                    conn.query("SELECT * FROM Applications WHERE aid=?", form.aid, function(err, result)
-                    {
-                        if(err)
-                        {
-                            callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                        }
-                        else
-                        {
-                            if(result[0]) 
-                            {
-                                if(result[0].submissionState === 'IRB')
-                                {
-                                    allowEdit();
-                                }
-                                else
-                                {
-                                    callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions"});
-                                }
-                            }
-                            else
-                            {
-                                callback({status: false, value: undefined, ErrMsg: "Database Error"});
-                            }
-                        }
-                    });
-                }
-                else
+                if(err) //there was a database error
                 {
                     callback({status: false, value: undefined, ErrMsg: "Database Error"});
                 }
-            }
-            else
-            {
-                callback({status: false, value: undefined, ErrMsg: "Database Error"});
-            }
+                else if (!a_result[0]) //there was a database error
+                {
+                    callback({status: false, value: undefined, ErrMsg: "Database Error"});                
+                }
+                else //we can keep checking
+                {
+                    for(var r in result) //check all permissions that the user has to see if any of them allow the user to edit this form
+                    {   
+                        if(result[r].permid === 12341) // the user is a cci
+                        {
+                            if(a_result[0].submissionState === 'CCI') //check if a cci user can edit this form
+                            {
+                                if(!done)
+                                {
+                                    done = true;
+                                    allowEdit();
+                                }
+                            }
+                        }
+                        if(result[r].permid === 123912) //the user is a pi user
+                        {   
+                            //check if a pi user can edit this form
+                            if(a_result[0].editState === 'open' && a_result[0].submissionState !== 'IRB' && a_result[0].submissionState !== 'CCI' && a_result[0].approvalState === 'null')
+                            {
+                                if(!done)
+                                {
+                                    done = true;
+                                    allowEdit();
+                                }   
+                            }
+                        }
+                        if(result[r].permid === 324552) //the user is an irb user
+                        {
+                            if(a_result[0].submissionState === 'IRB') //check if an irb user can edit this form
+                            {
+                                if(!done)
+                                {
+                                    done = true;
+                                    allowEdit();
+                                }
+                            }
+                        } 
+                    }
+                    if (!done) //we have fallen through and we do not have permissions
+                    {
+                        done = true; 
+                        callback({status: false, value: undefined, ErrMsg: "Insufficient Permissions Error"});
+                    }
+                }
+            });
         }
     });
 }
+                        
+  
+            
+  
 
 
 //Gets an application given an application Id

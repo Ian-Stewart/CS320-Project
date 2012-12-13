@@ -15,7 +15,7 @@ username varchar(30),
 uid int,
 password varchar(20) NOT NULL,
 Foreign KEY (uid) references Users(uid),
-primary key(u_name)
+primary key(username)
 );
 
 
@@ -48,8 +48,8 @@ approvalState ENUM('null','approved','denied'),
 username varchar(30),
 PRIMARY KEY(aid,rid),
 FOREIGN KEY (uid) REFERENCES Users(uid),
-FOREIGN KEY (username) REFERENCES Logins(u_name)
-
+FOREIGN KEY (username) REFERENCES Logins(username)
+);
 
 CREATE TABLE forma (
 aid INT,
