@@ -136,7 +136,7 @@ exports.deleteUser = function(username, callback)
 //
 
 
-exports.editApplication = function(application, callback)
+exports.editApplication = function(username,application, callback)
 {
     conn.query("UPDATE Applications SET ? WHERE aid=?", [application, application.aid], function(err, result)
     {
@@ -152,7 +152,7 @@ exports.editApplication = function(application, callback)
 }
 
 //save a changed version of a form. Takes a form object. Value is undefined.
-exports.saveForm = function(form, callback)
+exports.saveForm = function(username,form, callback)
 {
     conn.query("UPDATE FormA SET ? WHERE aid=?", [form, form.aid], function(err, result)
     {
@@ -169,7 +169,7 @@ exports.saveForm = function(form, callback)
 
 
 //Gets an application given an application Id
-exports.retrieveApplication = function(aid,callback)
+exports.retrieveApplication = function(username,aid,callback)
 {
     conn.query("SELECT * FROM Applications WHERE aid=?",aid,function(err,result)
     {
@@ -187,7 +187,7 @@ exports.retrieveApplication = function(aid,callback)
 
 //Gets an application's form A
 //Takes an application Id
-exports.retrieveFormA = function(aid,callback)
+exports.retrieveFormA = function(username,aid,callback)
 {
     conn.query("SELECT * FROM FormA WHERE aid=?",aid,function(err,result)
     {
