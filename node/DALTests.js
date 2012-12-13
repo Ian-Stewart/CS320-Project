@@ -164,11 +164,15 @@ A14:undefined
 
 
 var generic_app = {
-	aid:"101",
-	rid: 0.0,
-	proposalTitle:"Why is aid a varchar?",
-	username: "rms",
-	lastEditBy:"SnapCracklePop"
+	aid:123451,
+	rid: 0,
+	proposalTitle:"openApp",
+	uid: 4,
+	lastEditBy:"134214",
+	editState: "open",
+	submissionState:"defferedByCCI",
+	approvalState: "null",
+	username: "scolbert"
 };
 
 var app_Returned = {value:generic_app,status:true,ErrMsg:undefined};
@@ -177,7 +181,7 @@ function testRetrieveApplication()
 {
 exports.retrieveApplication = function(username,aid,callback)
 	console.log("Starting test for Retrieve Application");
-	var testA = DAL.retrieveApplication("USER","101",function(results)
+	var testA = DAL.retrieveApplication("scolbert",123451,function(results)
 	{
 		if(JSON.encode(result) === JSON.encode(app_Returned)
 		{
@@ -202,22 +206,11 @@ exports.retrieveApplication = function(username,aid,callback)
 }
 
 var generic_forma = {
-	username:"rms",
-	lastEditBy:"tidus",
-	proposalTitle:"The effects of dubstep on human mental health",
-	shortTitle:"Dubstep on Humans",
-	formA2:"",
-	formA3:"",
-	formA4:"",
-	formA5:"",
-	formA6:"",
-	formA7:"",
-	formA8:"",
-	formA9:"",
-	formA10:"",
-	formA11:"",
-	formA12:"",
-	formA13:"",
+	aid:123451,
+	rid:0,
+	lastEditBy:4,
+	proposalTitle:"openApp",
+	shortTitle:"op"
 };
  var formA_returned = {status: true, value: generic_forma, ErrMsg:undefined};
  var formA_invalid = {status: false, value: undefined, ErrMsg: "Database Error"};
@@ -226,37 +219,225 @@ var generic_forma = {
 function testRetrieveFormA()
 {
 	console.log("Starting test for Retrieve Form A");
-	var testA = DAL.retrieveFormA("USER","101",function(results)
+	var testA = DAL.retrieveFormA("scolbert",123451,function(results)
 	{
-		if(JSON.encode(result) === JSON.encode(formA_returned))
+		if(JSON.encode(results) === JSON.encode(formA_returned))
 		{
-			console.log("Test for retrieve valid form A passed. Expected " + formA_returned + ", got " + result);
+			console.log("Test for retrieve valid form A passed. Expected " + formA_returned + ", got " + results);
 		}
 		else
 		{
-			console.log("Test for retrieve valid form A failed. Expected " + formA_returned + ", got " + result);
+			console.log("Test for retrieve valid form A failed. Expected " + formA_returned + ", got " + results);
 		}
+	});
+	var testB = DAL.retrieveFormA("rms",209392,function(results)
+	{
+		if(results[0])
+		{
+			console.log("Invalid form a request test failed.");
+		}
+		else
+		{
+			console.log("Invalid form a request test passed.");
+		}
+		console.log("Expected " + formA_invalid + ", got " + results);
 	});
 }
 
+var listOfPIApplications = {//List of jjabram's open applications
+	0:{	
+		aid:3,
+		rid: 0,
+		proposalTitle:"lockedApp",
+		uid: 0,
+		lastEditBy:0,
+		editState: "locked",
+		submissionState:"null",
+		approvalState: "null",
+		username: "jjabrams"
+	},
+	1:{
+		aid:123451,
+		rid: 0,
+		proposalTitle:"openApp",
+		uid: 0,
+		lastEditBy:0,
+		editState: "open",
+		submissionState:"CCI",
+		approvalState: "null",
+		username: "jjabrams"
+	},
+};
+
+var listOFPIA_valid = {status: true,value:listOfPIApplications,ErrMsg:undefined};
+var listOFPIA_invalid = {status:true,value:{},ErrMsg:undefined};
+
 function testRetrieveApplicationsForPI()
 {
-
+	console.log("Starting test for get list of PI applications");
+	var testA = DAL.testRetrieveApplicationsForPI("jjabrams",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFPIA_valid))
+		{
+			console.log("Test get list valid PI applications successful.");
+		}
+		else
+		{
+			console.log("Test get list valid PI applications unsuccessful.");
+		}
+	console.log("Expected " + listOFPIA_valid + ", got " + results);
+	});
+	var testB = DAL.testRetrieveApplicationsForPI("rms",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFPIA_invalid))
+		{
+			console.log("Test get list valid PI applications successful.");
+		}
+		else
+		{
+			console.log("Test get list valid PI applications unsuccessful.");
+		}
+	console.log("Expected " + listOFPIA_invalid + ", got " + results);
+	});
 }
+
+var listofCCA = {
+	0:{
+		aid:1,
+		rid: 0,
+		proposalTitle:"lockedApp",
+		uid: 1,
+		lastEditBy:1,
+		editState: "locked",
+		submissionState:"CCI",
+		approvalState: "null",
+		username: "boraily"
+	}
+};
+
+var listOFCCI_valid = {status:true,value:listofCCA,ErrMsg:undefined};
+//var listOFCCI_invalid = {status:true,value:{},ErrMsg:undefined};
 
 function testRetrieveApplicationsForCCI()
 {
-
+	var testA = DAL.retrieveApplicationsForPI("jjabrams",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFPCCI_valid))
+		{
+			console.log("Test get valid CCI applications successful.");
+		}
+		else
+		{
+			console.log("Test get valid CCI applications unsuccessful.");
+		}
+	console.log("Expected " + listOFCCI_valid + ", got " + results);
+	});
+//There is no invalid input for this function yet
+//	var testB = DAL.retrieveApplicationsForPI("rms",function(results)
+//	{
+//		if(JSON.encode(results) === JSON.encode(listOFCCI_invalid))
+//		{
+//			console.log("Test get valid CCI applications successful.");
+//		}
+//		else
+//		{
+//			console.log("Test get valid CCI applications unsuccessful.");
+//		}
+//	console.log("Expected " + listOFCCI_invalid + ", got " + results);
+//	});
 }
+
+var listofIRB = {
+	0:{
+		aid:2,
+		rid: 0,
+		proposalTitle:"frozenApp",
+		uid: 2,
+		lastEditBy:2,
+		editState: "frozen",
+		submissionState:"IRB",
+		approvalState: "null",
+		username: "jstewart"
+	}
+};
+
+var listOFIRB_valid = {status:true,value:listofIRB,ErrMsg:undefined};
+//var listOFIRB_invalid = {status:true,value:{},ErrMsg:undefined};
 
 function testRetrieveApplicationsForIRB()
 {
-
+	console.log("Starting test for get list of IRB applications");
+	var testA = DAL.retrieveApplicationsForIRB("jstewart",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFIRB_valid))
+		{
+			console.log("Test get valid IRB applications successful.");
+		}
+		else
+		{
+			console.log("Test get valid IRB applications unsuccessful.");
+		}
+	console.log("Expected " + listOFIRB_valid + ", got " + results);
+	});
+	//There is no invalid input for this function yet
+	//var testB = DAL.retrieveApplicationsForIRB("rms",function(results)
+	//{
+	//	if(JSON.encode(results) === JSON.encode(listOFIRB_invalid))
+	//	{
+	//		console.log("Test get invalid IRB applications successful.");
+	//	}
+	//	else
+	//	{
+	//		console.log("Test get invalid IRB applications unsuccessful.");
+	//	}
+	//console.log("Expected " + listOFIRB_invalid + ", got " + results);
+	//});
 }
+
+var listofArchived = {
+	0:{
+		aid:0,
+		rid: 0,
+		proposalTitle:"archivedApp",
+		uid: 134214,
+		lastEditBy:134214,
+		editState: "archived",
+		submissionState:"null",
+		approvalState: "approved",
+		username: "glubas"
+	}
+};
+
+var listOFArchived_valid = {status:true,value:listofArchived,ErrMsg:undefined};
+var listOFArchived_invalid = {status:true,value:{},ErrMsg:undefined};
 
 function testRetrieveArchivedApplicationsForUser()
 {
-
+	console.log("Starting test for get list of archived applications");
+	var testA = DAL.retrieveArchivedApplicationsForUser("glubas",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFArchived_valid))
+		{
+			console.log("Test get valid IRB applications successful.");
+		}
+		else
+		{
+			console.log("Test get valid IRB applications unsuccessful.");
+		}
+	console.log("Expected " + listOFIRB_valid + ", got " + results);
+	});
+	var testB = DAL.retrieveArchivedApplicationsForUser("rms",function(results)
+	{
+		if(JSON.encode(results) === JSON.encode(listOFArchived_invalid))
+		{
+			console.log("Test get valid IRB applications successful.");
+		}
+		else
+		{
+			console.log("Test get valid IRB applications unsuccessful.");
+		}
+	console.log("Expected " + listOFArchived_invalid + ", got " + results);
+	});
 }
 
 function testSaveFormA()

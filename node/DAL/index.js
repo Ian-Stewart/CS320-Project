@@ -320,7 +320,7 @@ exports.retrieveFormA = function(username,aid,callback)
 //Retrieves all applications for a given PI
 exports.retrieveApplicationsForPI = function(username,callback)
 {
-    conn.query("SELECT * FROM Applications WHERE submissionState IS null AND username = ?",username,function(err,result)
+    conn.query("SELECT * FROM Applications WHERE username = ?",username,function(err,result)
     {
         if(err)
         {
