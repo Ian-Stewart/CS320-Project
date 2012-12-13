@@ -1,6 +1,6 @@
 CREATE TABLE Users (
 uid int NOT NULL AUTO_INCREMENT,
-u_name varchar(30),
+username varchar(30),
 first_name varchar(30) NOT NULL,
 last_name varchar(30) NOT NULL,
 email varchar(30) NOT NULL,
@@ -14,7 +14,7 @@ UNIQUE (email)
 
 CREATE TABLE Logins(
 
-u_name varchar(30),
+username varchar(30),
 
 uid int,
 
@@ -37,7 +37,7 @@ CREATE TABLE On_Permissions(
 
 uid int NOT NULL,
 
-u_name varchar(30),
+username varchar(30),
 
 permid INT NOT NULL,
 
@@ -54,7 +54,7 @@ aid INT NOT NULL AUTO_INCREMENT,
 rid INT NOT NULL,
 proposalTitle VARCHAR(50),
 uid int,
-u_name varchar(30),
+username varchar(30),
 lastEditBy VARCHAR(12),
 editState ENUM('null','open','frozen','locked','archived'),
 submissionState ENUM('defferedByIRB','defferedByCCI','CCI','IRB','null'),
@@ -69,7 +69,7 @@ FOREIGN KEY (username) REFERENCES Logins(u_name)
 CREATE TABLE FormA (
 aid INT,
 rid INT,
-u_name varchar(30),
+username varchar(30),
 lastEditBy VARCHAR(12),
 proposalTitle VARCHAR(50) NOT NULL,
 shortTitle CHAR(50) NOT NULL,
